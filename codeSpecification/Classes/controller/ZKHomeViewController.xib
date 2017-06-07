@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ZKHomeViewController">
+            <connections>
+                <outlet property="accountTextField" destination="zph-Az-IU7" id="tfv-RG-1i2"/>
+                <outlet property="backImageView" destination="1sD-H6-DCo" id="rpN-4G-awY"/>
+                <outlet property="gifImageView" destination="9q1-xT-6BO" id="Zbi-3R-7R9"/>
+                <outlet property="passwordTextField" destination="lE8-x0-1U1" id="qkf-37-uPI"/>
+                <outlet property="rightBackView" destination="TnI-v0-jgA" id="7LJ-fj-55Q"/>
+                <outlet property="sendButton" destination="3Vr-5j-yyV" id="fNb-bW-ENh"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="860" height="484"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1sD-H6-DCo">
+                    <rect key="frame" x="0.0" y="0.0" width="860" height="484"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" image="homeBack" id="e7b-iU-vUx"/>
+                </imageView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="TnI-v0-jgA">
+                    <rect key="frame" x="560" y="224" width="240" height="200"/>
+                    <subviews>
+                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zph-Az-IU7">
+                            <rect key="frame" x="30" y="140" width="180" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="jyU-Xa-5Ew"/>
+                            </constraints>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="请输入账号" bezelStyle="round" id="TaE-rH-kFV">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Vr-5j-yyV">
+                            <rect key="frame" x="30" y="39" width="180" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="9CV-Fk-T2q"/>
+                            </constraints>
+                            <buttonCell key="cell" type="smallSquare" title="登  录" bezelStyle="smallSquare" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="Prx-lD-hVS">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="18"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="loginAuthentication:" target="-2" id="Fc6-fc-EVh"/>
+                            </connections>
+                        </button>
+                        <secureTextField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lE8-x0-1U1">
+                            <rect key="frame" x="30" y="100" width="180" height="30"/>
+                            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="请输入密码" usesSingleLineMode="YES" bezelStyle="round" id="zEn-aJ-Bgj">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <allowedInputSourceLocales>
+                                    <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                </allowedInputSourceLocales>
+                            </secureTextFieldCell>
+                        </secureTextField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="9zt-ZG-j6R"/>
+                        <constraint firstAttribute="trailing" secondItem="lE8-x0-1U1" secondAttribute="trailing" constant="30" id="TTh-Xa-iv0"/>
+                        <constraint firstItem="lE8-x0-1U1" firstAttribute="top" secondItem="zph-Az-IU7" secondAttribute="bottom" constant="10" id="U9O-wB-DjP"/>
+                        <constraint firstItem="lE8-x0-1U1" firstAttribute="height" secondItem="zph-Az-IU7" secondAttribute="height" id="VN5-Xf-ZBy"/>
+                        <constraint firstItem="zph-Az-IU7" firstAttribute="top" secondItem="TnI-v0-jgA" secondAttribute="top" constant="30" id="lsT-jZ-JAW"/>
+                        <constraint firstItem="zph-Az-IU7" firstAttribute="leading" secondItem="TnI-v0-jgA" secondAttribute="leading" constant="30" id="qUu-dV-aYU"/>
+                        <constraint firstItem="3Vr-5j-yyV" firstAttribute="leading" secondItem="TnI-v0-jgA" secondAttribute="leading" constant="30" id="ruq-ac-sgs"/>
+                        <constraint firstAttribute="trailing" secondItem="zph-Az-IU7" secondAttribute="trailing" constant="30" id="u0u-cX-Jkh"/>
+                        <constraint firstAttribute="trailing" secondItem="3Vr-5j-yyV" secondAttribute="trailing" constant="30" id="vpj-iv-rBY"/>
+                        <constraint firstAttribute="bottom" secondItem="3Vr-5j-yyV" secondAttribute="bottom" constant="40" id="xZo-bR-may"/>
+                        <constraint firstItem="lE8-x0-1U1" firstAttribute="leading" secondItem="TnI-v0-jgA" secondAttribute="leading" constant="30" id="zO7-DC-a0b"/>
+                        <constraint firstAttribute="height" constant="200" id="zn4-l1-hRZ"/>
+                    </constraints>
+                </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="h14-4R-wLu">
+                    <rect key="frame" x="0.0" y="0.0" width="560" height="484"/>
+                    <subviews>
+                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9q1-xT-6BO">
+                            <rect key="frame" x="280" y="242" width="0.0" height="0.0"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ynZ-2C-beq"/>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="9q1-xT-6BO" firstAttribute="centerY" secondItem="h14-4R-wLu" secondAttribute="centerY" id="bGQ-Fn-IfV"/>
+                        <constraint firstItem="9q1-xT-6BO" firstAttribute="centerX" secondItem="h14-4R-wLu" secondAttribute="centerX" id="fgg-Dq-Oee"/>
+                    </constraints>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="h14-4R-wLu" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="0TK-nu-vMS"/>
+                <constraint firstAttribute="bottom" secondItem="1sD-H6-DCo" secondAttribute="bottom" id="5vI-uB-qD4"/>
+                <constraint firstItem="TnI-v0-jgA" firstAttribute="leading" secondItem="h14-4R-wLu" secondAttribute="trailing" id="8TQ-B1-guK"/>
+                <constraint firstAttribute="trailing" secondItem="1sD-H6-DCo" secondAttribute="trailing" id="BaU-Cg-86d"/>
+                <constraint firstItem="1sD-H6-DCo" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="M1O-Z4-7Yf"/>
+                <constraint firstItem="h14-4R-wLu" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Pnb-q0-InF"/>
+                <constraint firstAttribute="trailing" secondItem="TnI-v0-jgA" secondAttribute="trailing" constant="60" id="TwH-hH-MKg"/>
+                <constraint firstItem="TnI-v0-jgA" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="60" id="gII-Mg-1cn"/>
+                <constraint firstItem="1sD-H6-DCo" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="iZp-At-3Eb"/>
+                <constraint firstAttribute="bottom" secondItem="h14-4R-wLu" secondAttribute="bottom" id="m7l-x2-Rg4"/>
+            </constraints>
+            <point key="canvasLocation" x="-2032" y="-473"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="homeBack" width="860" height="484"/>
+    </resources>
+</document>

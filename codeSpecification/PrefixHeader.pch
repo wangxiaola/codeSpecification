@@ -1,0 +1,42 @@
+//
+//  PrefixHeader.pch
+//  codeSpecification
+//
+//  Created by 王小腊 on 2017/6/7.
+//  Copyright © 2017年 王小腊. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#define RGB(a, b, c) CGColorCreateGenericRGB(a/255, b/255, c/255, 1.0)
+//16进制RGB值转换到UIColor
+#define UIColorFromRGB(rgbValue) [NSColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+//16进制RGB值转换到UIColor
+#define UIColorFromRGB(rgbValue) [NSColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+/**
+ 弱引用
+ */
+#define TBWeakSelf __weak typeof(self) weakSelf = self;
+
+#ifdef DEBUG
+#define NSLog(...) NSLog(__VA_ARGS__);
+#define LOG_METHOD NSLog(@"\n%s\n", __func__);
+#else
+#define NSLog(...); #define LOG_METHOD;
+#endif
+
+#ifdef __OBJC__
+
+#import "ZKRequestTool.h"
+#import "NSObject+Tools.h"
+
+#endif
+
+
+#endif /* PrefixHeader_pch */
