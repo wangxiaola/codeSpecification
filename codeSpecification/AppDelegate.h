@@ -10,6 +10,12 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@property (weak) IBOutlet NSWindow *window;
+
+/**
+ 加载代码监测界面
+ */
+- (void)rootCodeValidationViewController;
 
 @end
 

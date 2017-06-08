@@ -22,7 +22,9 @@
 /**
  弱引用
  */
-#define TBWeakSelf __weak typeof(self) weakSelf = self;
+#define ZKWeakSelf __weak typeof(self) weakSelf = self;
+// 请求地址
+#define POST_REQUEST @"http://192.168.0.88:81/dologins"
 
 #ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__);
@@ -35,6 +37,8 @@
 
 #import "ZKRequestTool.h"
 #import "NSObject+Tools.h"
+#import "UserInfo.h"
+#import "HUD.h"
 
 #endif
 

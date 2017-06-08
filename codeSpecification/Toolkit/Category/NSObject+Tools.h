@@ -7,16 +7,36 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 @interface NSObject (Tools)
 
 /**
- 错误信息提示框
+ 开启一个提示窗口
 
- @param name 名称
- @param message 内容
- @param buttonTitle 按钮名称
+ @param name 提示名称
+ @param message 提示信息
+ @param buttonTitle 按钮title
  */
-+ (void)showErrorAlertTitle:(NSString *)name message:(NSString *)message buttonTitle:(NSString *)buttonTitle;
++ (void)showErrorWindowAlertTitle:(NSString *)name message:(NSString *)message buttonTitle:(NSString *)buttonTitle;
+/**
+ 提示信息框
+
+ @param name 提示名称
+ @param message 提示信息
+ @param window window
+ @param handler 电话回调
+ */
++ (void)showPromptAlertTitle:(NSString *)name message:(NSString *)message forWindow:(NSWindow *)window completionHandler:(void (^)(NSModalResponse returnCode))handler;
+/**
+ 错误信息框
+ 
+ @param name 提示名称
+ @param message 提示信息
+ @param window window
+ @param handler 电话回调
+ */
++ (void)showErrorAlertTitle:(NSString *)name message:(NSString *)message forWindow:(NSWindow *)window completionHandler:(void (^)(NSModalResponse returnCode))handler;
+
 
 @end

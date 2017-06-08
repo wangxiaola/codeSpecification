@@ -37,13 +37,13 @@
 + (void)post:(NSString *)requestUrl params:(NSMutableDictionary *)params success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure;
 {
     AFHTTPSessionManager *sessionManager = [self sessionManager];
-    NSLog(@"请求链接URL:%@ \n参数params:%@",requestUrl,params);
+    NSLog(@"\n请求链接URL:%@ \n参数params:%@",requestUrl,params);
     
     [sessionManager POST:requestUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         if (success) {
             id response = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-            NSLog(@"结果打印: %@",response);
+            NSLog(@"\n结果打印: %@",response);
             success(response);
             
         }
