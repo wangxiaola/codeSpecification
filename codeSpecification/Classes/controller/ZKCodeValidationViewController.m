@@ -8,17 +8,19 @@
 
 /**
  语音类型
-
+ 
  - VoiceTypeObjective: Objective-C
  - VoiceTypeSwift: Swift
  - VoiceTypeJava: Java
  */
 typedef NS_ENUM(NSInteger, VoiceType) {
-
+    
     VoiceTypeObjective = 0,
     VoiceTypeSwift,
     VoiceTypeJava
 };
+
+#define FileViewWidth 160
 
 #import "ZKCodeValidationViewController.h"
 #import "ZKLoginWindowController.h"
@@ -38,15 +40,27 @@ typedef NS_ENUM(NSInteger, VoiceType) {
 // 用户信息
 @property (strong)        UserInfo      *userInfo;
 
+@property (strong) NSWindow             *rightSetWindow;
+
 @property (strong) ZKLoginWindowController *loginWindowController;
+
+
 @end
 
 @implementation ZKCodeValidationViewController
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-//    NSOpenPanel
+    //    NSOpenPanel
     [self setData];
+    [self setUI];
+}
+#pragma mark -----界面设置-----
+- (void)setUI
+{
+    
+    
+    
 }
 #pragma mark  ----数据加载----
 - (void)setData
@@ -57,6 +71,7 @@ typedef NS_ENUM(NSInteger, VoiceType) {
     self.userInfo = [UserInfo account];
     // 赋值姓名
     self.nameTextField.stringValue = self.userInfo.name;
+    
 }
 #pragma mark  ----按钮点击事件----
 - (IBAction)voiceChoiceButton:(NSPopUpButton *)sender
@@ -70,7 +85,7 @@ typedef NS_ENUM(NSInteger, VoiceType) {
 }
 - (IBAction)toAnalyze:(NSButton *)sender
 {
-    
+    [NSObject showErrorAlertTitle:@"温馨提示" message:@"该功能暂未开放，请敬请等待。" forWindow:[self window] completionHandler:nil];
 }
 - (IBAction)changeTheAccount:(NSButton *)sender
 {
@@ -88,7 +103,11 @@ typedef NS_ENUM(NSInteger, VoiceType) {
             
         }
     }];
-
+    
+}
+- (IBAction)setFile:(NSButton *)sender
+{
+    [NSObject showErrorAlertTitle:@"温馨提示" message:@"当前版本已是最新的版本。" forWindow:self.window completionHandler:nil];
 }
 - (IBAction)checkTheUpdate:(NSButton *)sender
 {

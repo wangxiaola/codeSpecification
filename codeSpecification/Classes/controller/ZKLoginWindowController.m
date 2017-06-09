@@ -25,6 +25,8 @@
 @property (weak) IBOutlet NSButton          *sendButton;
 
 @property (strong) UserInfo                 *userInfo;
+
+@property (assign) BOOL                     isShowContentView;
 @end
 
 @implementation ZKLoginWindowController
@@ -69,7 +71,9 @@
     self.bottomWindow = [[NSWindow alloc]init];
     self.bottomWindow.styleMask = NSWindowStyleMaskBorderless;
     self.bottomWindow.backingType = NSBackingStoreNonretained;
-    [self.bottomWindow setFrame:NSMakeRect(self.window.frame.origin.x, self.window.frame.origin.y, self.window.frame.size.width, 80) display:YES animate:YES];
+    [self.bottomWindow setFrame:NSMakeRect(self.window.frame.origin.x, self.window.frame.origin.y, self.window.frame.size.width, 80) display:YES animate:NO];
+    //有阴影
+    [self.bottomWindow setHasShadow:NO];
     //设置ContentView
     self.bottomWindow.contentView = self.contentView;
     //添加childWindow
@@ -110,16 +114,21 @@
 
 - (IBAction)setStateButton:(NSButton *)sender
 {
-    CGRect frame = self.bottomWindow.frame;
+    CGRect myFrame = self.window.frame;
     // 判断是否显示设置界面
-    if (frame.origin.y == self.window.frame.origin.y)
+    if (self.isShowContentView == NO)
     {
-        [self.bottomWindow setFrame:NSMakeRect(self.window.frame.origin.x, self.window.frame.origin.y-78, self.window.frame.size.width, 80) display:YES animate:YES];
+        [self.bottomWindow setFrame:NSMakeRect(self.window.frame.origin.x, self.window.frame.origin.y, self.window.frame.size.width, 80) display:YES animate:NO];
+        
+        [self.bottomWindow setFrame:NSMakeRect(myFrame.origin.x, myFrame.origin.y-78, myFrame.size.width, 80) display:YES animate:YES];
         [sender setImage:[NSImage imageNamed:@"topButton"]];
-    }else{
-        [self.bottomWindow setFrame:NSMakeRect(self.window.frame.origin.x, self.window.frame.origin.y, self.window.frame.size.width, 80) display:YES animate:YES];
+    }
+    else
+    {
+        [self.bottomWindow setFrame:NSMakeRect(myFrame.origin.x, myFrame.origin.y, myFrame.size.width, 80) display:YES animate:YES];
         [sender setImage:[NSImage imageNamed:@"bottomButton"]];
     }
+    self.isShowContentView = !self.isShowContentView;
 }
 #pragma mark  ----逻辑处理----
 /**
