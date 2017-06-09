@@ -6,12 +6,10 @@
 //  Copyright © 2017年 王小腊. All rights reserved.
 //
 
-#define MDACCOUNT_PATH [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"UserInfo.data"]
 
 #import "UserInfo.h"
 
 @implementation UserInfo
-
 
 + (nonnull UserInfo *)account
 {

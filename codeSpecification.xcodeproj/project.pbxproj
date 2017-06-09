@@ -15,18 +15,18 @@
 		3B6660281EE8F80E00F66A6E /* HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6660271EE8F80E00F66A6E /* HUD.m */; };
 		3B6660311EE923F200F66A6E /* ZKCodeValidationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B66602F1EE923F200F66A6E /* ZKCodeValidationViewController.m */; };
 		3B6660321EE923F200F66A6E /* ZKCodeValidationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B6660301EE923F200F66A6E /* ZKCodeValidationViewController.xib */; };
+		3B66A42B1EEA35E800C1EF5F /* ZKLoginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B66A4291EEA35E800C1EF5F /* ZKLoginWindowController.m */; };
+		3B66A42C1EEA35E800C1EF5F /* ZKLoginWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B66A42A1EEA35E800C1EF5F /* ZKLoginWindowController.xib */; };
+		3B66A4341EEA83FD00C1EF5F /* ZKUserConfigurationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B66A4331EEA83FD00C1EF5F /* ZKUserConfigurationView.m */; };
+		3B66A4361EEA842100C1EF5F /* ZKUserConfigurationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B66A4351EEA842100C1EF5F /* ZKUserConfigurationView.xib */; };
+		3B66A4391EEA911E00C1EF5F /* ZKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B66A4381EEA911E00C1EF5F /* ZKUtil.m */; };
 		3B9939721EE793F80069E051 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9939711EE793F80069E051 /* AppDelegate.m */; };
 		3B9939751EE793F80069E051 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9939741EE793F80069E051 /* main.m */; };
 		3B9939771EE793F80069E051 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B9939761EE793F80069E051 /* Assets.xcassets */; };
 		3B99397A1EE793F80069E051 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B9939781EE793F80069E051 /* MainMenu.xib */; };
 		3B99398C1EE795240069E051 /* ZKBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99398B1EE795240069E051 /* ZKBaseViewController.m */; };
-		3B9939901EE798F00069E051 /* ZKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99398E1EE798F00069E051 /* ZKHomeViewController.m */; };
-		3B9939911EE798F00069E051 /* ZKHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B99398F1EE798F00069E051 /* ZKHomeViewController.xib */; };
 		3B9939971EE7A0AD0069E051 /* NSImage+Strenching.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9939961EE7A0AD0069E051 /* NSImage+Strenching.m */; };
 		3B99399A1EE7D3E20069E051 /* NSButton+ButtonColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9939991EE7D3E20069E051 /* NSButton+ButtonColor.m */; };
-		3B9939A81EE7D9D80069E051 /* homeTwo_Gif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3B9939A71EE7D9D80069E051 /* homeTwo_Gif.gif */; };
-		3B9939AA1EE7D9FA0069E051 /* homeOne_Gif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3B9939A91EE7D9FA0069E051 /* homeOne_Gif.gif */; };
-		3B9939AC1EE7DA670069E051 /* homeThree_Gif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3B9939AB1EE7DA670069E051 /* homeThree_Gif.gif */; };
 		3B9939BF1EE7EF860069E051 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9939B11EE7EF860069E051 /* AFHTTPSessionManager.m */; };
 		3B9939C01EE7EF860069E051 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9939B41EE7EF860069E051 /* AFNetworkReachabilityManager.m */; };
 		3B9939C11EE7EF860069E051 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9939B61EE7EF860069E051 /* AFSecurityPolicy.m */; };
@@ -53,6 +53,14 @@
 		3B66602E1EE923F200F66A6E /* ZKCodeValidationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKCodeValidationViewController.h; sourceTree = "<group>"; };
 		3B66602F1EE923F200F66A6E /* ZKCodeValidationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKCodeValidationViewController.m; sourceTree = "<group>"; };
 		3B6660301EE923F200F66A6E /* ZKCodeValidationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKCodeValidationViewController.xib; sourceTree = "<group>"; };
+		3B66A4281EEA35E800C1EF5F /* ZKLoginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLoginWindowController.h; sourceTree = "<group>"; };
+		3B66A4291EEA35E800C1EF5F /* ZKLoginWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLoginWindowController.m; sourceTree = "<group>"; };
+		3B66A42A1EEA35E800C1EF5F /* ZKLoginWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKLoginWindowController.xib; sourceTree = "<group>"; };
+		3B66A4321EEA83FD00C1EF5F /* ZKUserConfigurationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKUserConfigurationView.h; sourceTree = "<group>"; };
+		3B66A4331EEA83FD00C1EF5F /* ZKUserConfigurationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKUserConfigurationView.m; sourceTree = "<group>"; };
+		3B66A4351EEA842100C1EF5F /* ZKUserConfigurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKUserConfigurationView.xib; sourceTree = "<group>"; };
+		3B66A4371EEA911E00C1EF5F /* ZKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKUtil.h; sourceTree = "<group>"; };
+		3B66A4381EEA911E00C1EF5F /* ZKUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKUtil.m; sourceTree = "<group>"; };
 		3B99396D1EE793F80069E051 /* codeSpecification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = codeSpecification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B9939701EE793F80069E051 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3B9939711EE793F80069E051 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -62,16 +70,10 @@
 		3B99397B1EE793F80069E051 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B99398A1EE795240069E051 /* ZKBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKBaseViewController.h; sourceTree = "<group>"; };
 		3B99398B1EE795240069E051 /* ZKBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKBaseViewController.m; sourceTree = "<group>"; };
-		3B99398D1EE798F00069E051 /* ZKHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKHomeViewController.h; sourceTree = "<group>"; };
-		3B99398E1EE798F00069E051 /* ZKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKHomeViewController.m; sourceTree = "<group>"; };
-		3B99398F1EE798F00069E051 /* ZKHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKHomeViewController.xib; sourceTree = "<group>"; };
 		3B9939951EE7A0AD0069E051 /* NSImage+Strenching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Strenching.h"; sourceTree = "<group>"; };
 		3B9939961EE7A0AD0069E051 /* NSImage+Strenching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Strenching.m"; sourceTree = "<group>"; };
 		3B9939981EE7D3E20069E051 /* NSButton+ButtonColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSButton+ButtonColor.h"; sourceTree = "<group>"; };
 		3B9939991EE7D3E20069E051 /* NSButton+ButtonColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSButton+ButtonColor.m"; sourceTree = "<group>"; };
-		3B9939A71EE7D9D80069E051 /* homeTwo_Gif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = homeTwo_Gif.gif; sourceTree = "<group>"; };
-		3B9939A91EE7D9FA0069E051 /* homeOne_Gif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = homeOne_Gif.gif; sourceTree = "<group>"; };
-		3B9939AB1EE7DA670069E051 /* homeThree_Gif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = homeThree_Gif.gif; sourceTree = "<group>"; };
 		3B9939AD1EE7E3470069E051 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3B9939B01EE7EF860069E051 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		3B9939B11EE7EF860069E051 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
@@ -193,9 +195,9 @@
 		3B9939831EE7946C0069E051 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				3B99398D1EE798F00069E051 /* ZKHomeViewController.h */,
-				3B99398E1EE798F00069E051 /* ZKHomeViewController.m */,
-				3B99398F1EE798F00069E051 /* ZKHomeViewController.xib */,
+				3B66A4281EEA35E800C1EF5F /* ZKLoginWindowController.h */,
+				3B66A4291EEA35E800C1EF5F /* ZKLoginWindowController.m */,
+				3B66A42A1EEA35E800C1EF5F /* ZKLoginWindowController.xib */,
 				3B66602E1EE923F200F66A6E /* ZKCodeValidationViewController.h */,
 				3B66602F1EE923F200F66A6E /* ZKCodeValidationViewController.m */,
 				3B6660301EE923F200F66A6E /* ZKCodeValidationViewController.xib */,
@@ -213,6 +215,9 @@
 		3B9939851EE7947E0069E051 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				3B66A4321EEA83FD00C1EF5F /* ZKUserConfigurationView.h */,
+				3B66A4331EEA83FD00C1EF5F /* ZKUserConfigurationView.m */,
+				3B66A4351EEA842100C1EF5F /* ZKUserConfigurationView.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -221,9 +226,6 @@
 			isa = PBXGroup;
 			children = (
 				3B6660101EE8ED3400F66A6E /* user */,
-				3B9939A91EE7D9FA0069E051 /* homeOne_Gif.gif */,
-				3B9939A71EE7D9D80069E051 /* homeTwo_Gif.gif */,
-				3B9939AB1EE7DA670069E051 /* homeThree_Gif.gif */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -257,6 +259,8 @@
 			children = (
 				3B9939C71EE7EFD90069E051 /* ZKRequestTool.h */,
 				3B9939C81EE7EFD90069E051 /* ZKRequestTool.m */,
+				3B66A4371EEA911E00C1EF5F /* ZKUtil.h */,
+				3B66A4381EEA911E00C1EF5F /* ZKUtil.m */,
 			);
 			path = tool;
 			sourceTree = "<group>";
@@ -348,12 +352,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B9939AA1EE7D9FA0069E051 /* homeOne_Gif.gif in Resources */,
-				3B9939911EE798F00069E051 /* ZKHomeViewController.xib in Resources */,
 				3B9939771EE793F80069E051 /* Assets.xcassets in Resources */,
-				3B9939AC1EE7DA670069E051 /* homeThree_Gif.gif in Resources */,
 				3B6660321EE923F200F66A6E /* ZKCodeValidationViewController.xib in Resources */,
-				3B9939A81EE7D9D80069E051 /* homeTwo_Gif.gif in Resources */,
+				3B66A4361EEA842100C1EF5F /* ZKUserConfigurationView.xib in Resources */,
+				3B66A42C1EEA35E800C1EF5F /* ZKLoginWindowController.xib in Resources */,
 				3B99397A1EE793F80069E051 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,7 +372,6 @@
 				3B9939751EE793F80069E051 /* main.m in Sources */,
 				3B99399A1EE7D3E20069E051 /* NSButton+ButtonColor.m in Sources */,
 				3B9939C31EE7EF860069E051 /* AFURLResponseSerialization.m in Sources */,
-				3B9939901EE798F00069E051 /* ZKHomeViewController.m in Sources */,
 				3B6660281EE8F80E00F66A6E /* HUD.m in Sources */,
 				3B9939721EE793F80069E051 /* AppDelegate.m in Sources */,
 				3B6660231EE8F76C00F66A6E /* DJBezierPath.m in Sources */,
@@ -383,9 +384,12 @@
 				3B9939C41EE7EF860069E051 /* AFURLSessionManager.m in Sources */,
 				3B9939C01EE7EF860069E051 /* AFNetworkReachabilityManager.m in Sources */,
 				3B9939971EE7A0AD0069E051 /* NSImage+Strenching.m in Sources */,
+				3B66A4341EEA83FD00C1EF5F /* ZKUserConfigurationView.m in Sources */,
+				3B66A42B1EEA35E800C1EF5F /* ZKLoginWindowController.m in Sources */,
 				3B6660131EE8ED4400F66A6E /* UserInfo.m in Sources */,
 				3B9939D11EE7FFB00069E051 /* NSObject+Tools.m in Sources */,
 				3B6660311EE923F200F66A6E /* ZKCodeValidationViewController.m in Sources */,
+				3B66A4391EEA911E00C1EF5F /* ZKUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

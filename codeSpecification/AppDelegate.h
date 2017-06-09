@@ -7,15 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ZKLoginWindowController.h"
+#import "ZKCodeValidationViewController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
-@property (weak) IBOutlet NSWindow *window;
+@property (nonatomic, strong) ZKCodeValidationViewController *codeValidationViewController;
 
-/**
- 加载代码监测界面
- */
-- (void)rootCodeValidationViewController;
-
+@property (nonatomic, strong) ZKLoginWindowController *loginWindowController;
 @end
 

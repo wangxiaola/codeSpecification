@@ -406,7 +406,7 @@ typedef void (^CompletionHander)(void);
     [label setEditable:NO];
     [label setSelectable:NO];
     
-    label.font = [NSFont boldSystemFontOfSize:16.0];
+    label.font = [NSFont boldSystemFontOfSize:14.0];
     [label setTextColor:[NSColor colorWithCalibratedWhite:1.0 alpha:0.85]];
 }
 

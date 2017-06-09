@@ -9,29 +9,20 @@
 /**
  window加载类型vc
  
- - WindowTypeHomeViewController: home
+ - WindowTypeLoginViewController: login
  - WindowTypeCodeValidationViewController: code
  */
 typedef NS_ENUM(NSInteger, WindowType)
 {
-    WindowTypeHomeViewController = 0,
+    WindowTypeLoginViewController = 0,
     
     WindowTypeCodeValidationViewController
     
 };
 #import "AppDelegate.h"
-#import "ZKHomeViewController.h"
-#import "ZKCodeValidationViewController.h"
+
 @interface AppDelegate ()
 
-
-
-/**
- 必须强引用一下 因为contentView是弱应用
- */
-@property (nonatomic, strong) ZKHomeViewController *homeViewController;
-
-@property (nonatomic, strong) ZKCodeValidationViewController *codeValidationViewController;
 @end
 
 @implementation AppDelegate
@@ -39,61 +30,41 @@ typedef NS_ENUM(NSInteger, WindowType)
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     
-    //只保留关闭按钮
-    [[self.window standardWindowButton:NSWindowZoomButton] setHidden:YES];
-    [[self.window standardWindowButton:NSWindowMiniaturizeButton] setHidden:YES];
+    /*是否自动登录*/
+    BOOL isAutomaticLoginState = [ZKUtil obtainBoolForKey:AutomaticLoginSateKey];
     
     // 登录过的直接加载监测界面
-    if ([UserInfo account].name.length == 0)
+    if ([UserInfo account].name.length > 0 && isAutomaticLoginState == YES)
     {
-        [self rootContentView:WindowTypeHomeViewController];
+        _codeValidationViewController = [[ZKCodeValidationViewController alloc] initWithWindowNibName:@"ZKCodeValidationViewController"];
+        [_codeValidationViewController.window setFrame:NSMakeRect(0, 0, 935, 588) display:YES animate:NO];
+        //让显示的位置居于屏幕的中心
+        [[_codeValidationViewController window] center];
+        //前置显示窗口
+        [_codeValidationViewController.window orderFront:nil];
     }
     else
     {
-        [self rootContentView:WindowTypeCodeValidationViewController];
+        _loginWindowController = [[ZKLoginWindowController alloc] initWithWindowNibName:@"ZKLoginWindowController"];
+        [_codeValidationViewController.window setFrame:NSMakeRect(0, 0, 230, 320) display:YES animate:NO];
+        //让显示的位置居于屏幕的中心
+        [[_loginWindowController window] center];
+        //前置显示窗口
+        [_loginWindowController.window orderFront:nil];
     }
 }
-/**
- 加载代码监测界面
- */
-- (void)rootCodeValidationViewController;
+// 当点击关闭按钮的时候结束APP进程
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
-    [self.window close];
-    ZKCodeValidationViewController *vc = [[ZKCodeValidationViewController alloc] initWithWindowNibName:@"ZKCodeValidationViewController"];
-    
-    [NSApp beginModalSessionForWindow:[vc window]];
-    [NSApp runModalForWindow:[vc window]];
-    //前置显示窗口
-    [vc.window orderFront:nil];
+    return YES;
 }
-
-/**
- 加载登录主页
- */
-- (void)rootHomeViewController
+- (IBAction)goJianShu:(NSMenuItem *)sender
 {
-    self.homeViewController = [[ZKHomeViewController alloc] initWithNibName:@"ZKHomeViewController" bundle:nil];
-    self.window.contentView = self.homeViewController.view;
-    // 设置homeViewController窗口和window窗口一致
-    self.homeViewController.view.frame = self.window.contentView.frame;
-    [self.window orderFront:nil];
+    [ZKUtil openSafarlUrl:@"http://www.jianshu.com/u/a3a190b64408"];
 }
-
-/**
- 更加类型加载vc
- 
- @param type vc类型
- */
-- (void)rootContentView:(WindowType)type
+- (IBAction)goGithub:(NSMenuItem *)sender
 {
-    if (type == WindowTypeHomeViewController)
-    {
-        [self rootHomeViewController];
-    }
-    else
-    {
-        [self rootCodeValidationViewController];
-    }
+    [ZKUtil openSafarlUrl:@"https://github.com/wangxiaola"];
 }
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application

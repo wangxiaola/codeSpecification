@@ -21,22 +21,24 @@ typedef NS_ENUM(NSInteger, VoiceType) {
 };
 
 #import "ZKCodeValidationViewController.h"
-#import "ZKHomeViewController.h"
+#import "ZKLoginWindowController.h"
 #import "AppDelegate.h"
 
 @interface ZKCodeValidationViewController ()
 //语音选择按钮
 @property (weak) IBOutlet NSPopUpButton *voiceChoice;
 // 是否分析当前文件按钮
-@property (weak) IBOutlet NSButton *currentFileButton;
+@property (weak) IBOutlet NSButton      *currentFileButton;
 // 名字
-@property (weak) IBOutlet NSTextField *nameTextField;
+@property (weak) IBOutlet NSTextField   *nameTextField;
 // 表格
-@property (weak) IBOutlet NSTabView *listTableView;
+@property (weak) IBOutlet NSTabView     *listTableView;
 
-@property (nonatomic) VoiceType voiceType;
+@property (nonatomic)     VoiceType     voiceType;
 // 用户信息
-@property (nonatomic, strong) UserInfo *userInfo;
+@property (strong)        UserInfo      *userInfo;
+
+@property (strong) ZKLoginWindowController *loginWindowController;
 @end
 
 @implementation ZKCodeValidationViewController
@@ -62,7 +64,7 @@ typedef NS_ENUM(NSInteger, VoiceType) {
     self.voiceType = sender.selectedTag;
     if (sender.selectedTag >0)
     {
-        [HUD showMessenger:@"当前语音暂未开放" fromView:self.window.contentView dismiss:nil];
+        [HUD showMessenger:@"当前编程语言暂未开放" fromView:self.window.contentView dismiss:nil];
     }
     
 }
@@ -76,15 +78,13 @@ typedef NS_ENUM(NSInteger, VoiceType) {
         
         if (returnCode == NSAlertFirstButtonReturn)
         {
-            [self.window close];
-            ZKHomeViewController *vc = [[ZKHomeViewController alloc] initWithNibName:@"ZKHomeViewController" bundle:nil];
-            AppDelegate * appDelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-            NSWindow *window =  appDelegate.window;
-            window.contentView = vc.view;
-            
-            [NSApp beginModalSessionForWindow:window];
-            [NSApp runModalForWindow:window];
-        
+            _loginWindowController = [[ZKLoginWindowController alloc] initWithWindowNibName:@"ZKLoginWindowController"];
+            //显示需要跳转的窗口
+            [_loginWindowController.window orderFront:nil];
+            [_loginWindowController.window setAnimationBehavior:NSWindowAnimationBehaviorDocumentWindow];
+            [_loginWindowController.window center];
+            //关闭当前窗口
+            [self.window orderOut:nil];
             
         }
     }];
@@ -92,11 +92,7 @@ typedef NS_ENUM(NSInteger, VoiceType) {
 }
 - (IBAction)checkTheUpdate:(NSButton *)sender
 {
-    
-    
-    
-    
+    [NSObject showErrorAlertTitle:@"温馨提示" message:@"当前版本已是最新的版本。" forWindow:self.window completionHandler:nil];
 }
-
 
 @end
