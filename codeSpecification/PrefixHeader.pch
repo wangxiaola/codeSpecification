@@ -25,10 +25,13 @@
 #define RememberStateKey @"RememberState"
 //  自动登录状态Key
 #define AutomaticLoginSateKey @"AutomaticLoginSate"
+
 //  要监测的文件后缀类名的数组 .h  .m
 #define ZKRowsCheckFileTypes @"ZKRowsCheckFileTypes"
 //  要忽略的文件名数组 xxx文件
 #define ZKRowsIgnoreFolders @"ZKRowsIgnoreFolders"
+// 是否只分析当日修改
+#define IsNewModifiedAnalysis @"IsNewModifiedAnalysis"
 
 /**
  弱引用

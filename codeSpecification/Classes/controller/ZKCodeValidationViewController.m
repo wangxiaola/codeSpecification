@@ -6,20 +6,7 @@
 //  Copyright © 2017年 王小腊. All rights reserved.
 //
 
-/**
- 语音类型
- 
- - VoiceTypeObjective: Objective-C
- - VoiceTypeSwift: Swift
- - VoiceTypeJava: Java
- */
-typedef NS_ENUM(NSInteger, VoiceType) {
-    
-    VoiceTypeObjective = 0,
-    VoiceTypeSwift,
-    VoiceTypeJava
-};
-
+NSString *const kIsEdit = @"kIsEdit";
 #define FileViewWidth 160
 
 #import "ZKCodeValidationViewController.h"
@@ -33,35 +20,39 @@ typedef NS_ENUM(NSInteger, VoiceType) {
 #import "ZKFileProcessingMode.h"
 #import "AppDelegate.h"
 
-@interface ZKCodeValidationViewController ()
-// 语言选择按钮
-@property (weak) IBOutlet NSPopUpButton *voiceChoice;
-// 是否分析当前文件按钮
-@property (weak) IBOutlet NSButton      *currentFileButton;
-// 名字
-@property (weak) IBOutlet NSTextField   *nameTextField;
-// 表格
-@property (weak) IBOutlet NSTabView     *listTableView;
-
-@property (nonatomic)     VoiceType     voiceType;
-// 用户信息
-@property (strong)        UserInfo      *userInfo;
-
-@property (strong) NSWindow             *rightSetWindow;
-
-@property (nonatomic, strong) ZKLoginWindowController *loginWindowController;
+@interface ZKCodeValidationViewController ()<NSTokenFieldDelegate,ZKFileProcessingModeDelegate>
+// 语音类型
+@property (nonatomic)     CompileLanguageType languageType;
 // 文件处理工具
-@property (nonatomic, strong) ZKFileProcessingMode    *fileProcessingMode;
+@property (nonatomic, strong) ZKFileProcessingMode                *fileProcessingMode;
+
+@property (nonatomic, strong) ZKLoginWindowController             *loginWindowController;
 /* tableView加载的vc*/
-// 输出日志vc
-@property (nonatomic, strong) ZKLogViewController    *logViewController;
-// 结果vc
-@property (nonatomic, strong) ZKResultsAnalysisViewController     *resultsAnalysisViewController;
 // 错误描述vc
 @property (nonatomic, strong) ZKErrorDescriptionViewController    *errorDescriptionViewController;
 // 规则说明
 @property (nonatomic, strong) ZKInfoViewController                *infoViewController;
-
+// 输出日志vc
+@property (nonatomic, strong) ZKLogViewController                 *logViewController;
+// 结果vc
+@property (nonatomic, strong) ZKResultsAnalysisViewController     *resultsAnalysisViewController;
+@property (strong)        NSWindow      *rightSetWindow;
+/** 需要检测的文件类型*/
+@property (weak) IBOutlet NSTokenField *checkFileType;
+/** 需要忽略检测的文件夹*/
+@property (weak) IBOutlet NSTokenField *ignoreFolder;
+// 用户信息
+@property (strong)        UserInfo      *userInfo;
+// 是否正在运行<文件编译中>
+@property (nonatomic, assign) BOOL      isRun;
+// 是否分析当前文件按钮
+@property (weak) IBOutlet NSButton      *currentFileButton;
+// 语言选择按钮
+@property (weak) IBOutlet NSPopUpButton *voiceChoice;
+// 表格
+@property (weak) IBOutlet NSTabView     *listTableView;
+// 名字
+@property (weak) IBOutlet NSTextField   *nameTextField;
 
 @end
 
@@ -73,6 +64,7 @@ typedef NS_ENUM(NSInteger, VoiceType) {
     if (!_fileProcessingMode)
     {
         _fileProcessingMode = [[ZKFileProcessingMode alloc] init];
+        _fileProcessingMode.delegate = self;
     }
     return _fileProcessingMode;
 }
@@ -107,27 +99,57 @@ typedef NS_ENUM(NSInteger, VoiceType) {
 #pragma mark  ----数据加载----
 - (void)setData
 {
+    self.checkFileType.tokenStyle = NSTokenStyleSquared;
+    self.ignoreFolder.tokenStyle = NSTokenStyleSquared;
+    self.checkFileType.delegate = self;
+    self.ignoreFolder.delegate = self;
+    
     // 初始化语音类型
-    self.voiceType = VoiceTypeObjective;
+    self.languageType = CompileLanguageTypeObjective;
     // 获取个人信息
     self.userInfo = [UserInfo account];
     // 赋值姓名
     self.nameTextField.stringValue = self.userInfo.name;
-    
+    // 如果设置未更改
+    if ([ZKUtil obtainBoolForKey:kIsEdit] == NO)
+    {
+        [ZKUtil cacheUserValue:self.defaultFileTypes key:ZKRowsCheckFileTypes];
+        [ZKUtil cacheUserValue:self.defaultIgnoreFolders key:ZKRowsIgnoreFolders];
+        [ZKUtil saveBoolForKey:IsNewModifiedAnalysis valueBool:YES];
+    }
+    self.checkFileType.objectValue = [ZKUtil getUserDataForKey:ZKRowsCheckFileTypes];
+    self.ignoreFolder.objectValue  = [ZKUtil getUserDataForKey:ZKRowsIgnoreFolders];
+    self.currentFileButton.state   = [ZKUtil obtainBoolForKey:IsNewModifiedAnalysis];
+}
+#pragma mark - getter
+
+- (NSArray *)defaultFileTypes
+{
+    NSArray *array = @[@"h",@"m"];
+    return array;
+}
+
+- (NSArray *)defaultIgnoreFolders
+{
+    NSArray *array = @[@"Pods",@".svn",@".git"];
+    return array;
 }
 #pragma mark  ----按钮点击事件----
 - (IBAction)voiceChoiceButton:(NSPopUpButton *)sender
 {
-    self.voiceType = sender.selectedTag;
-    if (sender.selectedTag >0)
-    {
-        [HUD showMessenger:@"当前编程语言暂未开放" fromView:self.window.contentView dismiss:nil];
-    }
-    
+    self.languageType = sender.selectedTag;
 }
 - (IBAction)toAnalyze:(NSButton *)sender
 {
-    [NSObject showErrorAlertTitle:@"温馨提示" message:@"该功能暂未开放，请敬请等待。" forWindow:[self window] completionHandler:nil];
+    if (self.isRun == NO)
+    {
+         [self.fileProcessingMode startAnalyze];
+    }
+    else
+    {
+        [HUD showMessenger:@"文件正在检测中,请稍后再试!" fromView:self.window.contentView dismiss:nil];
+    }
+
 }
 - (IBAction)changeTheAccount:(NSButton *)sender
 {
@@ -149,29 +171,14 @@ typedef NS_ENUM(NSInteger, VoiceType) {
 }
 - (IBAction)browseFileClick:(NSButton *)sender
 {
-    NSOpenPanel* panel = [NSOpenPanel openPanel];
-       // 设置默认打开路径
-    panel.directoryURL = [NSURL URLWithString:NSHomeDirectory()];
-    //是否可以选择目录
-    panel.canChooseDirectories = YES;
-    //是否允许多选
-    panel.allowsMultipleSelection = NO;
-    //允许选择的文件类型
-    panel.allowedFileTypes = nil;
-    ZKWeakSelf
-    [panel beginWithCompletionHandler:^(NSInteger result)
+    if (self.isRun == NO)
     {
-        // 点击了Open按钮
-        if (result == NSModalResponseOK)
-        {
-            NSURL *fileUrl = panel.URLs.firstObject;
-            if (fileUrl)
-            {
-             [weakSelf.fileProcessingMode dragDropFilePathList:@[[fileUrl path]]];
-            }
-        }
-    }];
-    
+         [self.fileProcessingMode browseClickcompileLanguageType:self.languageType];
+    }
+    else
+    {
+        [HUD showMessenger:@"文件正在检测中,请稍后再试!" fromView:self.window.contentView dismiss:nil];
+    }
 }
 - (IBAction)setFile:(NSButton *)sender
 {
@@ -181,4 +188,93 @@ typedef NS_ENUM(NSInteger, VoiceType) {
 {
     [NSObject showErrorAlertTitle:@"温馨提示" message:@"当前版本已是最新的版本。" forWindow:self.window completionHandler:nil];
 }
+- (IBAction)currentFileButtonClick:(NSButton *)sender
+{
+    [ZKUtil saveBoolForKey:IsNewModifiedAnalysis valueBool:sender.state];
+    [ZKUtil saveBoolForKey:kIsEdit valueBool:YES];
+}
+#pragma mark  ----ZKFileProcessingModeDelegate----
+/**
+ 开始分析
+ 
+ @param mode 数据
+ */
+- (void)startAnalyzeData:(ZKAnalysisLogMode *)mode;
+{
+    self.isRun = YES;
+}
+/**
+ 结束分析
+ 
+ @param mode 数据
+ */
+- (void)stopAnalyzeData:(ZKAnalysisLogMode *)mode;
+{
+    self.isRun = NO;
+}
+/**
+ 文件分析异常
+ 
+ @param message 错误消息
+ */
+- (void)fileAnalysisAbnormalErrorMessage:(NSString *)message;
+{
+   self.isRun = NO;
+
+}
+/**
+ 分析日志返回
+ 
+ @param mode 数据
+ */
+- (void)analysisOfDailyReturnsData:(ZKAnalysisLogMode *)mode;
+{
+
+
+}
+/**
+ 分析结果返回
+ 
+ @param mode 数据
+ */
+- (void)analysisResultsReturnsData:(ZKCodeResults *)mode;
+{
+
+}
+/**
+ 错误描述返回
+ 
+ @param mode 数据
+ */
+- (void)errorDescriptionReturnData:(ZKErrorCodeInformation *)mode;
+{
+
+}
+#pragma mark --NSTokenFieldDelegate--
+/**
+ 存储最新的文件检测配置
+ */
+- (void)controlTextDidChange:(NSNotification *)obj
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    // 标记配置是否已更改
+    [userDefaults setBool:YES forKey:kIsEdit];
+    
+    if ([obj.object isEqual:self.checkFileType]) {
+        [userDefaults setObject:self.fileTypes forKey:ZKRowsCheckFileTypes];
+    } else {
+        [userDefaults setObject:self.ignoreFolder.objectValue forKey:ZKRowsIgnoreFolders];
+    }
+    [userDefaults synchronize];
+}
+- (NSArray *)fileTypes
+{
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self.checkFileType.objectValue];
+    // 将文件类型名称全部转化成小写
+    for (NSString *fileType in self.checkFileType.objectValue) {
+        [fileType lowercaseString];
+    }
+    return array;
+}
+
 @end

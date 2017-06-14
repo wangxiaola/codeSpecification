@@ -11,6 +11,40 @@
 @interface ZKUtil : NSObject
 
 /**
+ 保存在NSUserDefaults
+ 
+ @param value 值
+ @param key 键
+ */
++ (void)cacheUserValue:(id )value key:(NSString *)key;
+
+/**
+ 取出NSUserDefaults的值
+ 
+ @param key 键
+ @return 值
+ */
++ (id )getUserDataForKey:(NSString *)key;
+
+/**
+ *  缓存数据
+ *
+ *  @param fileName 缓存数据的文件名
+ *
+ *  @param data 需要缓存的二进制
+ */
++ (void)cacheForData:(NSData *)data fileName:(NSString *)fileName;
+
+/**
+ *  取出缓存数据
+ *
+ *  @param fileName 缓存数据的文件名
+ *
+ *  @return 缓存的二进制数据
+ */
++ (NSData *)getCacheFileName:(NSString *)fileName;
+
+/**
  保存bool值
 
  @param key key

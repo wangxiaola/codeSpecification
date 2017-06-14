@@ -8,7 +8,9 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ZKCodeValidationViewController">
             <connections>
+                <outlet property="checkFileType" destination="fza-rR-LUw" id="fMB-YG-OOx"/>
                 <outlet property="currentFileButton" destination="DBp-vt-P2M" id="n1U-um-6pL"/>
+                <outlet property="ignoreFolder" destination="ow9-gM-pSV" id="ng2-3F-Jwn"/>
                 <outlet property="listTableView" destination="pQ2-4W-fRG" id="0EW-qy-seG"/>
                 <outlet property="nameTextField" destination="J5f-S4-xIy" id="rhm-fe-uLd"/>
                 <outlet property="voiceChoice" destination="bMp-cK-CdY" id="GvS-Re-EAl"/>
@@ -44,14 +46,17 @@
                         </textFieldCell>
                     </textField>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="DBp-vt-P2M">
-                        <rect key="frame" x="257" y="551" width="129" height="18"/>
-                        <buttonCell key="cell" type="check" title="分析当日修改文件" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="lxu-vZ-lS1">
+                        <rect key="frame" x="177" y="551" width="129" height="18"/>
+                        <buttonCell key="cell" type="check" title="分析当日修改文件" bezelStyle="regularSquare" imagePosition="left" inset="2" id="lxu-vZ-lS1">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="currentFileButtonClick:" target="-2" id="XwV-7L-LoB"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q7x-qy-Omt">
-                        <rect key="frame" x="184" y="547" width="55" height="25"/>
+                        <rect key="frame" x="104" y="547" width="55" height="25"/>
                         <buttonCell key="cell" type="roundTextured" title=" 浏 览  " bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mdF-hm-S5x">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -118,8 +123,8 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmR-ci-sFr">
-                        <rect key="frame" x="92" y="551" width="84" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="尚未选择文件" id="SjB-Xw-LEg">
+                        <rect key="frame" x="92" y="551" width="4" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="SjB-Xw-LEg">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -229,7 +234,7 @@
                             <constraint firstAttribute="width" constant="160" id="V4E-Xx-CSW"/>
                             <constraint firstAttribute="height" constant="45" id="al3-gh-eDA"/>
                         </constraints>
-                        <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="h,m" drawsBackground="YES" allowsEditingTextAttributes="YES" id="w8G-SK-I8c">
+                        <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" drawsBackground="YES" allowsEditingTextAttributes="YES" id="w8G-SK-I8c">
                             <font key="font" metaFont="cellTitle"/>
                             <color key="textColor" red="0.99955970049999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -253,7 +258,7 @@
                     </textField>
                     <tokenField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ow9-gM-pSV">
                         <rect key="frame" x="745" y="390" width="160" height="45"/>
-                        <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Pods" drawsBackground="YES" allowsEditingTextAttributes="YES" id="T9H-Kp-YR2">
+                        <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" drawsBackground="YES" allowsEditingTextAttributes="YES" id="T9H-Kp-YR2">
                             <font key="font" metaFont="cellTitle"/>
                             <color key="textColor" red="0.99955970049999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

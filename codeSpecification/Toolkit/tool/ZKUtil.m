@@ -6,10 +6,44 @@
 //  Copyright © 2017年 王小腊. All rights reserved.
 //
 
+
+/**
+ *  沙盒Cache路径
+ */
+#define kCachePath ([NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject])
 #import "ZKUtil.h"
 
 @implementation ZKUtil
 #pragma mark  ----保存&&获取 状态----
+
++ (void)cacheUserValue:(id )value key:(NSString *)key;
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:value forKey:key];
+    [defaults synchronize];
+}
++ (id )getUserDataForKey:(NSString *)key;
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    id data = [defaults objectForKey:key];
+    return data;
+}
+
++ (void)cacheForData:(NSData *)data fileName:(NSString *)fileName
+{
+    NSString *path = [kCachePath stringByAppendingPathComponent:fileName];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [data writeToFile:path atomically:YES];
+    });
+}
+
++ (NSData *)getCacheFileName:(NSString *)fileName
+{
+    NSString *path = [kCachePath stringByAppendingPathComponent:fileName];
+    return [[NSData alloc] initWithContentsOfFile:path];
+}
+
+
 + (void)saveBoolForKey:(NSString *)key valueBool:(BOOL)value;
 {
     [[NSUserDefaults standardUserDefaults] setBool:value forKey:key];

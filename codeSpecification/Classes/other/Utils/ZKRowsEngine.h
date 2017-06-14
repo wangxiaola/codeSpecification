@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^ZKRowsCompletion)(NSUInteger fileNumber, NSUInteger codeRows);
+typedef void(^ZKRowsCompletion)(NSArray <NSString *>*fileArrray);
 typedef void(^ZKRowsError)(NSString *errorInfo);
 
 @interface ZKRowsEngine : NSObject
@@ -23,11 +23,11 @@ typedef void(^ZKRowsError)(NSString *errorInfo);
 /**
  计算拖入/输入的文件夹内所有的代码文件以及代码行数
  
- @param filePath 文件路径
+ @param filePath 文件路径数组
  @param completion 计算完成的回调
- @param error 文件不存在的错误回调 
+ @param error 文件不存在的错误回调
  */
-- (void)computeWithFilePath:(NSString *)filePath
+- (void)computeWithFilePath:(NSArray <NSURL *>*)filePath
                  completion:(ZKRowsCompletion)completion
                       error:(ZKRowsError)error;
 

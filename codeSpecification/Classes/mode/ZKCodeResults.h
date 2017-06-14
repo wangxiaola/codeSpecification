@@ -7,26 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZKErrorCodeInformation.h"
+
 @interface ZKCodeResults : NSObject
 
-/**修改时间**/
-@property (nonatomic, copy) NSString  *modifyTime;
-/**类后缀名**/
-@property (nonatomic, copy) NSString  *classSuffix;
+/**文件路径**/
+@property (nonatomic, copy) NSString     *filePath;
 /**类名**/
-@property (nonatomic, copy) NSString  *className;
-/**代码行数**/
-@property (nonatomic, copy) NSString  *codeNumber;
+@property (nonatomic, copy) NSString     *className;
+/**有效代码行数**/
+@property (nonatomic, copy) NSString     *codeNumber;
 /**有效注释行数**/
-@property (nonatomic, copy) NSString  *noteNumber;
+@property (nonatomic, assign) NSInteger  noteNumber;
 /**注释占比**/
-@property (nonatomic, assign) CGFloat *annotationProportion;
+@property (nonatomic, assign) CGFloat    annotationProportion;
 /**代码质量**/
-@property (nonatomic, copy) NSString  *codeQuality;
-/**不规范代码**/
-@property (nonatomic, copy) NSArray   <ZKErrorCodeInformation *>*errorCode;
-
-
-
+@property (nonatomic, copy) NSString     *codeQuality;
+/**不规范代码数量**/
+@property (nonatomic, assign) NSInteger  errorCodeNumber;
 @end

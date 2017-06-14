@@ -7,15 +7,89 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ZKAnalysisLogMode.h"
+#import "ZKCodeResults.h"
+#import "ZKErrorCodeInformation.h"
+
+@protocol ZKFileProcessingModeDelegate <NSObject>
+@optional
+
+/**
+ 开始分析
+ 
+ @param mode 数据
+ */
+- (void)startAnalyzeData:(ZKAnalysisLogMode *)mode;
+
+/**
+ 结束分析
+ 
+ @param mode 数据
+ */
+- (void)stopAnalyzeData:(ZKAnalysisLogMode *)mode;
+
+/**
+ 文件分析异常
+
+ @param message 错误消息
+ */
+- (void)fileAnalysisAbnormalErrorMessage:(NSString *)message;
+
+/**
+ 分析日志返回
+
+ @param mode 数据
+ */
+- (void)analysisOfDailyReturnsData:(ZKAnalysisLogMode *)mode;
+
+/**
+ 分析结果返回
+
+ @param mode 数据
+ */
+- (void)analysisResultsReturnsData:(ZKCodeResults *)mode;
+
+/**
+ 错误描述返回
+
+ @param mode 数据
+ */
+- (void)errorDescriptionReturnData:(ZKErrorCodeInformation *)mode;
+
+@end
+
+
+/**
+ 文件编译语言类型
+
+ - CompileLanguageTypeObjective: Objective-OC
+ - CompileLanguageTypeSwift: swift
+ - CompileLanguageTypeJava: Java
+ */
+typedef NS_ENUM(NSInteger, CompileLanguageType) {
+
+    CompileLanguageTypeObjective = 0,
+    CompileLanguageTypeSwift,
+    CompileLanguageTypeJava
+};
 
 @interface ZKFileProcessingMode : NSObject
 
 
 /**
- 用户选择的文件路径数组
+ 用户点击浏览文件
 
- @param filePathList 文件路径数组
+ @param languageType 语言类型
  */
-- (void)dragDropFilePathList:(NSArray<NSString *> *)filePathList;
+- (void)browseClickcompileLanguageType:(CompileLanguageType)languageType;
+
+/**
+ 开始分析文件
+ */
+- (void)startAnalyze;
+/**
+ 数据处理代理
+ */
+@property(nonatomic, weak) id <ZKFileProcessingModeDelegate> delegate;
 
 @end
