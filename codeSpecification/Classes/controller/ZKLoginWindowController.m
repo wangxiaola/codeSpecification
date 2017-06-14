@@ -224,5 +224,9 @@
     [self.window orderOut:nil];
     //    [self.window close];
 }
-
+// 当点击关闭按钮的时候结束APP进程
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
+{
+    return YES;
+}
 @end

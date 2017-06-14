@@ -22,7 +22,7 @@
     //设置接受的类型
     sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     //设置请求超时
-    sessionManager.requestSerializer.timeoutInterval = 10;
+    sessionManager.requestSerializer.timeoutInterval = 5;
     return sessionManager;
 }
 #pragma mark -tool-

@@ -20,6 +20,19 @@
 		3B66A4341EEA83FD00C1EF5F /* ZKUserConfigurationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B66A4331EEA83FD00C1EF5F /* ZKUserConfigurationView.m */; };
 		3B66A4361EEA842100C1EF5F /* ZKUserConfigurationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B66A4351EEA842100C1EF5F /* ZKUserConfigurationView.xib */; };
 		3B66A4391EEA911E00C1EF5F /* ZKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B66A4381EEA911E00C1EF5F /* ZKUtil.m */; };
+		3B6D966A1EEE32F90028B689 /* ZKFileProcessingMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D96691EEE32F90028B689 /* ZKFileProcessingMode.m */; };
+		3B6D966D1EEE34EF0028B689 /* ZKFileMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D966C1EEE34EF0028B689 /* ZKFileMode.m */; };
+		3B6D96711EEE37790028B689 /* ZKRowsEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D96701EEE37790028B689 /* ZKRowsEngine.m */; };
+		3B6D96751EEE772F0028B689 /* ZKCodeResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D96741EEE772F0028B689 /* ZKCodeResults.m */; };
+		3B6D96781EEE796A0028B689 /* ZKErrorCodeInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D96771EEE796A0028B689 /* ZKErrorCodeInformation.m */; };
+		3B6D968B1EEE8C800028B689 /* ZKLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D96891EEE8C800028B689 /* ZKLogViewController.m */; };
+		3B6D968C1EEE8C800028B689 /* ZKLogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B6D968A1EEE8C800028B689 /* ZKLogViewController.xib */; };
+		3B6D96901EEE8CB50028B689 /* ZKResultsAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D968E1EEE8CB50028B689 /* ZKResultsAnalysisViewController.m */; };
+		3B6D96911EEE8CB50028B689 /* ZKResultsAnalysisViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B6D968F1EEE8CB50028B689 /* ZKResultsAnalysisViewController.xib */; };
+		3B6D96951EEE8CD60028B689 /* ZKErrorDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D96931EEE8CD60028B689 /* ZKErrorDescriptionViewController.m */; };
+		3B6D96961EEE8CD60028B689 /* ZKErrorDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B6D96941EEE8CD60028B689 /* ZKErrorDescriptionViewController.xib */; };
+		3B6D969A1EEE8CE50028B689 /* ZKInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D96981EEE8CE50028B689 /* ZKInfoViewController.m */; };
+		3B6D969B1EEE8CE50028B689 /* ZKInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B6D96991EEE8CE50028B689 /* ZKInfoViewController.xib */; };
 		3B9939721EE793F80069E051 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9939711EE793F80069E051 /* AppDelegate.m */; };
 		3B9939751EE793F80069E051 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9939741EE793F80069E051 /* main.m */; };
 		3B9939771EE793F80069E051 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B9939761EE793F80069E051 /* Assets.xcassets */; };
@@ -61,6 +74,28 @@
 		3B66A4351EEA842100C1EF5F /* ZKUserConfigurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKUserConfigurationView.xib; sourceTree = "<group>"; };
 		3B66A4371EEA911E00C1EF5F /* ZKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKUtil.h; sourceTree = "<group>"; };
 		3B66A4381EEA911E00C1EF5F /* ZKUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKUtil.m; sourceTree = "<group>"; };
+		3B6D96681EEE32F90028B689 /* ZKFileProcessingMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKFileProcessingMode.h; sourceTree = "<group>"; };
+		3B6D96691EEE32F90028B689 /* ZKFileProcessingMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKFileProcessingMode.m; sourceTree = "<group>"; };
+		3B6D966B1EEE34EF0028B689 /* ZKFileMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKFileMode.h; sourceTree = "<group>"; };
+		3B6D966C1EEE34EF0028B689 /* ZKFileMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKFileMode.m; sourceTree = "<group>"; };
+		3B6D966F1EEE37790028B689 /* ZKRowsEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKRowsEngine.h; sourceTree = "<group>"; };
+		3B6D96701EEE37790028B689 /* ZKRowsEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKRowsEngine.m; sourceTree = "<group>"; };
+		3B6D96731EEE772F0028B689 /* ZKCodeResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKCodeResults.h; sourceTree = "<group>"; };
+		3B6D96741EEE772F0028B689 /* ZKCodeResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKCodeResults.m; sourceTree = "<group>"; };
+		3B6D96761EEE796A0028B689 /* ZKErrorCodeInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKErrorCodeInformation.h; sourceTree = "<group>"; };
+		3B6D96771EEE796A0028B689 /* ZKErrorCodeInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKErrorCodeInformation.m; sourceTree = "<group>"; };
+		3B6D96881EEE8C800028B689 /* ZKLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLogViewController.h; sourceTree = "<group>"; };
+		3B6D96891EEE8C800028B689 /* ZKLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLogViewController.m; sourceTree = "<group>"; };
+		3B6D968A1EEE8C800028B689 /* ZKLogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKLogViewController.xib; sourceTree = "<group>"; };
+		3B6D968D1EEE8CB50028B689 /* ZKResultsAnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKResultsAnalysisViewController.h; sourceTree = "<group>"; };
+		3B6D968E1EEE8CB50028B689 /* ZKResultsAnalysisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKResultsAnalysisViewController.m; sourceTree = "<group>"; };
+		3B6D968F1EEE8CB50028B689 /* ZKResultsAnalysisViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKResultsAnalysisViewController.xib; sourceTree = "<group>"; };
+		3B6D96921EEE8CD60028B689 /* ZKErrorDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKErrorDescriptionViewController.h; sourceTree = "<group>"; };
+		3B6D96931EEE8CD60028B689 /* ZKErrorDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKErrorDescriptionViewController.m; sourceTree = "<group>"; };
+		3B6D96941EEE8CD60028B689 /* ZKErrorDescriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKErrorDescriptionViewController.xib; sourceTree = "<group>"; };
+		3B6D96971EEE8CE50028B689 /* ZKInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKInfoViewController.h; sourceTree = "<group>"; };
+		3B6D96981EEE8CE50028B689 /* ZKInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKInfoViewController.m; sourceTree = "<group>"; };
+		3B6D96991EEE8CE50028B689 /* ZKInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKInfoViewController.xib; sourceTree = "<group>"; };
 		3B99396D1EE793F80069E051 /* codeSpecification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = codeSpecification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B9939701EE793F80069E051 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3B9939711EE793F80069E051 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -127,6 +162,34 @@
 				3B6660211EE8F76C00F66A6E /* DJProgressIndicator.m */,
 			);
 			path = DJProgressHUD;
+			sourceTree = "<group>";
+		};
+		3B6D966E1EEE37640028B689 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3B6D966F1EEE37790028B689 /* ZKRowsEngine.h */,
+				3B6D96701EEE37790028B689 /* ZKRowsEngine.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		3B6D96871EEE8C550028B689 /* 子VC */ = {
+			isa = PBXGroup;
+			children = (
+				3B6D96881EEE8C800028B689 /* ZKLogViewController.h */,
+				3B6D96891EEE8C800028B689 /* ZKLogViewController.m */,
+				3B6D968A1EEE8C800028B689 /* ZKLogViewController.xib */,
+				3B6D968D1EEE8CB50028B689 /* ZKResultsAnalysisViewController.h */,
+				3B6D968E1EEE8CB50028B689 /* ZKResultsAnalysisViewController.m */,
+				3B6D968F1EEE8CB50028B689 /* ZKResultsAnalysisViewController.xib */,
+				3B6D96921EEE8CD60028B689 /* ZKErrorDescriptionViewController.h */,
+				3B6D96931EEE8CD60028B689 /* ZKErrorDescriptionViewController.m */,
+				3B6D96941EEE8CD60028B689 /* ZKErrorDescriptionViewController.xib */,
+				3B6D96971EEE8CE50028B689 /* ZKInfoViewController.h */,
+				3B6D96981EEE8CE50028B689 /* ZKInfoViewController.m */,
+				3B6D96991EEE8CE50028B689 /* ZKInfoViewController.xib */,
+			);
+			path = "子VC";
 			sourceTree = "<group>";
 		};
 		3B9939641EE793F80069E051 = {
@@ -201,6 +264,7 @@
 				3B66602E1EE923F200F66A6E /* ZKCodeValidationViewController.h */,
 				3B66602F1EE923F200F66A6E /* ZKCodeValidationViewController.m */,
 				3B6660301EE923F200F66A6E /* ZKCodeValidationViewController.xib */,
+				3B6D96871EEE8C550028B689 /* 子VC */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -208,6 +272,14 @@
 		3B9939841EE794740069E051 /* mode */ = {
 			isa = PBXGroup;
 			children = (
+				3B6D96681EEE32F90028B689 /* ZKFileProcessingMode.h */,
+				3B6D96691EEE32F90028B689 /* ZKFileProcessingMode.m */,
+				3B6D966B1EEE34EF0028B689 /* ZKFileMode.h */,
+				3B6D966C1EEE34EF0028B689 /* ZKFileMode.m */,
+				3B6D96731EEE772F0028B689 /* ZKCodeResults.h */,
+				3B6D96741EEE772F0028B689 /* ZKCodeResults.m */,
+				3B6D96761EEE796A0028B689 /* ZKErrorCodeInformation.h */,
+				3B6D96771EEE796A0028B689 /* ZKErrorCodeInformation.m */,
 			);
 			path = mode;
 			sourceTree = "<group>";
@@ -225,6 +297,7 @@
 		3B9939861EE7948C0069E051 /* other */ = {
 			isa = PBXGroup;
 			children = (
+				3B6D966E1EEE37640028B689 /* Utils */,
 				3B6660101EE8ED3400F66A6E /* user */,
 			);
 			path = other;
@@ -352,11 +425,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B6D968C1EEE8C800028B689 /* ZKLogViewController.xib in Resources */,
+				3B6D969B1EEE8CE50028B689 /* ZKInfoViewController.xib in Resources */,
 				3B9939771EE793F80069E051 /* Assets.xcassets in Resources */,
+				3B6D96911EEE8CB50028B689 /* ZKResultsAnalysisViewController.xib in Resources */,
 				3B6660321EE923F200F66A6E /* ZKCodeValidationViewController.xib in Resources */,
 				3B66A4361EEA842100C1EF5F /* ZKUserConfigurationView.xib in Resources */,
 				3B66A42C1EEA35E800C1EF5F /* ZKLoginWindowController.xib in Resources */,
 				3B99397A1EE793F80069E051 /* MainMenu.xib in Resources */,
+				3B6D96961EEE8CD60028B689 /* ZKErrorDescriptionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,21 +444,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B6D966A1EEE32F90028B689 /* ZKFileProcessingMode.m in Sources */,
+				3B6D969A1EEE8CE50028B689 /* ZKInfoViewController.m in Sources */,
+				3B6D968B1EEE8C800028B689 /* ZKLogViewController.m in Sources */,
+				3B6D96711EEE37790028B689 /* ZKRowsEngine.m in Sources */,
 				3B99398C1EE795240069E051 /* ZKBaseViewController.m in Sources */,
 				3B9939C11EE7EF860069E051 /* AFSecurityPolicy.m in Sources */,
 				3B9939751EE793F80069E051 /* main.m in Sources */,
+				3B6D96751EEE772F0028B689 /* ZKCodeResults.m in Sources */,
 				3B99399A1EE7D3E20069E051 /* NSButton+ButtonColor.m in Sources */,
 				3B9939C31EE7EF860069E051 /* AFURLResponseSerialization.m in Sources */,
 				3B6660281EE8F80E00F66A6E /* HUD.m in Sources */,
 				3B9939721EE793F80069E051 /* AppDelegate.m in Sources */,
 				3B6660231EE8F76C00F66A6E /* DJBezierPath.m in Sources */,
+				3B6D96781EEE796A0028B689 /* ZKErrorCodeInformation.m in Sources */,
 				3B9939C91EE7EFD90069E051 /* ZKRequestTool.m in Sources */,
+				3B6D96901EEE8CB50028B689 /* ZKResultsAnalysisViewController.m in Sources */,
 				3B6660241EE8F76C00F66A6E /* DJProgressHUD.m in Sources */,
 				3B6660221EE8F76C00F66A6E /* DJActivityIndicator.m in Sources */,
 				3B9939BF1EE7EF860069E051 /* AFHTTPSessionManager.m in Sources */,
+				3B6D96951EEE8CD60028B689 /* ZKErrorDescriptionViewController.m in Sources */,
 				3B6660251EE8F76C00F66A6E /* DJProgressIndicator.m in Sources */,
 				3B9939C21EE7EF860069E051 /* AFURLRequestSerialization.m in Sources */,
 				3B9939C41EE7EF860069E051 /* AFURLSessionManager.m in Sources */,
+				3B6D966D1EEE34EF0028B689 /* ZKFileMode.m in Sources */,
 				3B9939C01EE7EF860069E051 /* AFNetworkReachabilityManager.m in Sources */,
 				3B9939971EE7A0AD0069E051 /* NSImage+Strenching.m in Sources */,
 				3B66A4341EEA83FD00C1EF5F /* ZKUserConfigurationView.m in Sources */,

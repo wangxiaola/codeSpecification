@@ -56,6 +56,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="browseFileClick:" target="-2" id="C6F-84-G5C"/>
+                        </connections>
                     </button>
                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bMp-cK-CdY">
                         <rect key="frame" x="102" y="491" width="110" height="26"/>
@@ -95,8 +98,8 @@
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUJ-jb-nIi">
-                        <rect key="frame" x="28" y="395" width="142" height="19"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="本次上传结果信息：" id="sDe-gq-ree">
+                        <rect key="frame" x="28" y="395" width="112" height="19"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="代码监测信息：" id="sDe-gq-ree">
                             <font key="font" metaFont="system" size="15"/>
                             <color key="textColor" red="1" green="0.50664603710174561" blue="0.0043584080412983894" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -186,12 +189,6 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="注释内容" identifier="" id="fZ7-Bt-044">
-                                <view key="view" id="irH-V8-Hdy">
-                                    <rect key="frame" x="10" y="33" width="929" height="355"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                            </tabViewItem>
                             <tabViewItem label="分析结果" identifier="" id="7RE-KL-lhy">
                                 <view key="view" id="rWG-hx-qIR">
                                     <rect key="frame" x="10" y="33" width="929" height="355"/>
@@ -233,7 +230,7 @@
                             <constraint firstAttribute="height" constant="45" id="al3-gh-eDA"/>
                         </constraints>
                         <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="h,m" drawsBackground="YES" allowsEditingTextAttributes="YES" id="w8G-SK-I8c">
-                            <font key="font" metaFont="system" size="12"/>
+                            <font key="font" metaFont="cellTitle"/>
                             <color key="textColor" red="0.99955970049999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </tokenFieldCell>
@@ -257,7 +254,7 @@
                     <tokenField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ow9-gM-pSV">
                         <rect key="frame" x="745" y="390" width="160" height="45"/>
                         <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Pods" drawsBackground="YES" allowsEditingTextAttributes="YES" id="T9H-Kp-YR2">
-                            <font key="font" metaFont="system" size="12"/>
+                            <font key="font" metaFont="cellTitle"/>
                             <color key="textColor" red="0.99955970049999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </tokenFieldCell>

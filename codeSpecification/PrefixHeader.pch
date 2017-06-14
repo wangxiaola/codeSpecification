@@ -19,10 +19,17 @@
 
 //16进制RGB值转换到UIColor
 #define UIColorFromRGB(rgbValue) [NSColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-//记住密码状态key
+
+
+//  记住密码状态key
 #define RememberStateKey @"RememberState"
-//自动登录状态Key
+//  自动登录状态Key
 #define AutomaticLoginSateKey @"AutomaticLoginSate"
+//  要监测的文件后缀类名的数组 .h  .m
+#define ZKRowsCheckFileTypes @"ZKRowsCheckFileTypes"
+//  要忽略的文件名数组 xxx文件
+#define ZKRowsIgnoreFolders @"ZKRowsIgnoreFolders"
+
 /**
  弱引用
  */
