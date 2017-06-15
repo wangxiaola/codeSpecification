@@ -6,6 +6,19 @@
 //  Copyright © 2017年 王小腊. All rights reserved.
 //
 
+/**
+ 代码验证类型
+ 
+ - ValidationCodeTypeLeft:  验证左边
+ - ValidationCodeTypeRight: 验证右边
+ - ValidationCodeTypeAll:   两边都验证
+ */
+typedef NS_ENUM(NSInteger, ValidationCodeType) {
+    
+    ValidationCodeTypeLeft = 0,
+    ValidationCodeTypeRight,
+    ValidationCodeTypeAll
+};
 #import "ZKFileProcessingMode.h"
 #import "ZKRowsEngine.h"
 #import "ZKExceptionStatements.h"
@@ -26,23 +39,12 @@
 }
 
 @property (nonatomic) CompileLanguageType languageType;
-
-/** 文件路径数据源*/
-@property (nonatomic, strong) NSMutableArray <NSString *> *dataSource;
-
 @property (nonatomic, strong) NSArray <NSURL *>*filePathList;
-
 
 @end
 @implementation ZKFileProcessingMode
 #pragma mark  ----懒加载----
-- (NSMutableArray <NSString *> *)dataSource
-{
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray array];
-    }
-    return _dataSource;
-}
+
 #pragma mark  ----delegate----
 /**
  记录代理协议状态
@@ -184,31 +186,41 @@
     NSString *content = [NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
     NSArray *contenArray = [content componentsSeparatedByString:@"\n"];
     
+    __block NSInteger codeLines           = 0;//有效代码行数
+    __block NSInteger commentLines        = 0;//有效注释行数
+    __block NSInteger exceptionCodeNumber = 0;//异常代码数量
+    
     [contenArray enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        http://www.cocoachina.com/ios/20160111/14926.html
-        //去掉左右两边的空格；
+        //        http://www.cocoachina.com/ios/20160111/14926.html
+        /*去掉左右两边的空格*/
         NSString *contenString = [obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if (contenString.length > 0)
         {
-            // 首字母判断
+            codeLines += 1;
+            // 首字母判断 如果是函数类就是有效代码
             if ([self isFunctionCharacterString:contenString])
             {
-                
-                NSLog(@" ---%@",contenString);
+                /*** - ****/
+                if (![self isCodeSpaceString:contenString predicate:@"-" validationType:ValidationCodeTypeRight]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:@"'-' 右边要空格"];
+                    exceptionCodeNumber += 1;
+                }
                 
             }
             else
             {
-              NSLog(@" ++++++ %@",contenString);
+                //注释代码
+                commentLines += 1;
             }
         }
-
+        
     }];
 }
 #pragma mark  ----字符判断----
 /**
-  字符是否是函数字符
-
+ 字符是否是函数字符
+ 
  @param key 字符
  @return yes
  */
@@ -222,7 +234,7 @@
     NSPredicate*predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     
     NSString *first = [key substringToIndex:1];//字符串开始
-    NSArray  *array =@[@"-", @"_" , @"+", @"#", @"@", @"{", @"}", @";"];
+    NSArray  *array =@[@"-", @"_" , @"+", @"#", @"@", @"{", @"}", @";", @"&", @"|"];
     //匹配字符串，反回结果， SELF＝＝表示数组中每一个元素
     NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"SELF == %@", first];
     BOOL isSpecialCharacters = [array filteredArrayUsingPredicate:predicate1].count >0;
@@ -236,6 +248,53 @@
     }
 }
 
+/**
+ 代码是否空格
+ 
+ @param str       要处理的字符串
+ @param predicate 匹配字符串
+ @param type 验证代码类型
+ 
+ @return yes 规范
+ */
+- (BOOL)isCodeSpaceString:(NSString *)str predicate:(NSString *)predicate validationType:(ValidationCodeType)type;
+{
+    NSPredicate *rules = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@",predicate];
+    BOOL isContains = [rules evaluateWithObject:str];
+    
+    if (isContains == NO)
+    {
+        return YES;
+    }
+    NSInteger predicateLength = predicate.length;
+    //现获取要截取的字符串位置
+    NSRange range = [str rangeOfString:predicate];
+    
+    if (type == ValidationCodeTypeLeft)
+    {
+        NSRange  leftRange = NSMakeRange(range.location - predicateLength, 1);
+        NSString * leftResult = [str substringWithRange:leftRange];
+        
+        return [leftResult isEqualToString:@" "];
+    }
+    else if (type == ValidationCodeTypeRight)
+    {
+        NSRange rightRange = NSMakeRange(range.location + predicateLength, 1);
+        NSString * rightResult  = [str substringWithRange:rightRange];
+        return [rightResult isEqualToString:@" "];
+    }
+    else if (type == ValidationCodeTypeAll)
+    {   // 截取左边
+        NSRange  leftRange = NSMakeRange(range.location - predicateLength, 1);
+        NSString * leftResult = [str substringWithRange:leftRange];
+        // 截取右边
+        NSRange rightRange = NSMakeRange(range.location + predicateLength, 1);
+        NSString * rightResult  = [str substringWithRange:rightRange];
+        
+        return ([leftResult isEqualToString:@" "],[rightResult isEqualToString:@" "]);
+    }
+    return YES;
+}
 #pragma mark /**** Swift *****/
 - (void)swiftDetectionData:(NSArray <NSDictionary *> *)fileArrray;
 {
