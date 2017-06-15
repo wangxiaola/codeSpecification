@@ -30,7 +30,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn width="248" minWidth="40" maxWidth="1000" id="uiK-Vz-kWA">
+                                    <tableColumn identifier="columen0" width="248" minWidth="40" maxWidth="1000" id="uiK-Vz-kWA">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="文件名">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -63,7 +63,7 @@
                                             </tableCellView>
                                         </prototypeCellViews>
                                     </tableColumn>
-                                    <tableColumn identifier="" width="100" minWidth="10" maxWidth="1000" id="p6X-Np-kRk">
+                                    <tableColumn identifier="columen1" width="100" minWidth="10" maxWidth="1000" id="p6X-Np-kRk">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="注释占比">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -96,7 +96,7 @@
                                             </tableCellView>
                                         </prototypeCellViews>
                                     </tableColumn>
-                                    <tableColumn width="100" minWidth="40" maxWidth="1000" id="2bh-vC-Sfh">
+                                    <tableColumn identifier="columen2" width="100" minWidth="40" maxWidth="1000" id="2bh-vC-Sfh">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="有效代码行数">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -129,7 +129,7 @@
                                             </tableCellView>
                                         </prototypeCellViews>
                                     </tableColumn>
-                                    <tableColumn identifier="" width="100" minWidth="10" maxWidth="1000" id="ZBh-W7-JSP">
+                                    <tableColumn identifier="columen3" width="100" minWidth="10" maxWidth="1000" id="ZBh-W7-JSP">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="有效注释行数">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -162,7 +162,7 @@
                                             </tableCellView>
                                         </prototypeCellViews>
                                     </tableColumn>
-                                    <tableColumn identifier="" width="100" minWidth="10" maxWidth="1000" id="WtE-v5-6KI">
+                                    <tableColumn identifier="columen4" width="100" minWidth="10" maxWidth="1000" id="WtE-v5-6KI">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="代码质量">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -195,7 +195,7 @@
                                             </tableCellView>
                                         </prototypeCellViews>
                                     </tableColumn>
-                                    <tableColumn width="107" minWidth="10" maxWidth="1000" id="Za5-sV-2HQ">
+                                    <tableColumn identifier="columen5" width="107" minWidth="10" maxWidth="1000" id="Za5-sV-2HQ">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="不规范代码">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>

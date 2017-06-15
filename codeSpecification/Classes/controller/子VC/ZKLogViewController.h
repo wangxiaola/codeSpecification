@@ -7,10 +7,20 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class ZKAnalysisLogMode;
 
 /**
  分析日志vc
  */
 @interface ZKLogViewController : NSViewController
+
+
+/**
+ 添加数据
+
+ @param list 数据
+ @param start 是否开始
+ */
+- (void)addTableViewData:(ZKAnalysisLogMode *)list isStart:(BOOL)start;
 
 @end

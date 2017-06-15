@@ -79,14 +79,16 @@ typedef NS_ENUM(NSInteger, CompileLanguageType) {
 /**
  用户点击浏览文件
 
- @param languageType 语言类型
+
  */
-- (void)browseClickcompileLanguageType:(CompileLanguageType)languageType;
+- (void)browseClickcompile;
 
 /**
  开始分析文件
+ 
+ @param languageType 语言类型
  */
-- (void)startAnalyze;
+- (void)startAnalyzeLanguageType:(CompileLanguageType)languageType;
 /**
  数据处理代理
  */

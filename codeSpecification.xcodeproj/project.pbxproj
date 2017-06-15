@@ -76,6 +76,7 @@
 		3B66A4351EEA842100C1EF5F /* ZKUserConfigurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKUserConfigurationView.xib; sourceTree = "<group>"; };
 		3B66A4371EEA911E00C1EF5F /* ZKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKUtil.h; sourceTree = "<group>"; };
 		3B66A4381EEA911E00C1EF5F /* ZKUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKUtil.m; sourceTree = "<group>"; };
+		3B6D054E1EF25858006AFCAC /* ZKExceptionStatements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKExceptionStatements.h; sourceTree = "<group>"; };
 		3B6D96681EEE32F90028B689 /* ZKFileProcessingMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKFileProcessingMode.h; sourceTree = "<group>"; };
 		3B6D96691EEE32F90028B689 /* ZKFileProcessingMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKFileProcessingMode.m; sourceTree = "<group>"; };
 		3B6D966F1EEE37790028B689 /* ZKRowsEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKRowsEngine.h; sourceTree = "<group>"; };
@@ -280,6 +281,7 @@
 				3B6D96741EEE772F0028B689 /* ZKCodeResults.m */,
 				3B6D96761EEE796A0028B689 /* ZKErrorCodeInformation.h */,
 				3B6D96771EEE796A0028B689 /* ZKErrorCodeInformation.m */,
+				3B6D054E1EF25858006AFCAC /* ZKExceptionStatements.h */,
 			);
 			path = mode;
 			sourceTree = "<group>";

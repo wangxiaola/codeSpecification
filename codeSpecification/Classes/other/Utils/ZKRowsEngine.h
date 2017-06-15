@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^ZKRowsCompletion)(NSArray <NSString *>*fileArrray);
+typedef void(^ZKRowsCompletion)(NSArray <NSDictionary *>*fileArrray);
 typedef void(^ZKRowsError)(NSString *errorInfo);
 
 @interface ZKRowsEngine : NSObject

@@ -48,9 +48,8 @@
                                                 <rect key="frame" x="1" y="1" width="477" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Htf-4L-Ess">
-                                                        <rect key="frame" x="0.0" y="0.0" width="477" height="17"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Htf-4L-Ess">
+                                                        <rect key="frame" x="-2" y="0.0" width="481" height="17"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="Z6u-jl-gZV">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -58,6 +57,12 @@
                                                         </textFieldCell>
                                                     </textField>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Htf-4L-Ess" firstAttribute="leading" secondItem="ElL-P8-tJJ" secondAttribute="leading" id="B0b-EE-jHn"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Htf-4L-Ess" secondAttribute="trailing" id="Sny-Ab-R7j"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Htf-4L-Ess" secondAttribute="bottom" id="Tdh-44-FSg"/>
+                                                    <constraint firstItem="Htf-4L-Ess" firstAttribute="top" secondItem="ElL-P8-tJJ" secondAttribute="top" id="e6T-Nj-gqT"/>
+                                                </constraints>
                                                 <connections>
                                                     <outlet property="textField" destination="Htf-4L-Ess" id="vQI-wr-PeM"/>
                                                 </connections>

@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
+@property (nonatomic, strong) NSDateFormatter *timeFormatter;
+
 @property (nonatomic, strong) NSMutableArray  *dataArray;
 
 @end
@@ -28,6 +30,19 @@
         _dataArray = [NSMutableArray array];
     }
     return _dataArray;
+}
+- (instancetype)init
+{
+    if (self = [super init])
+    {
+        self.dateFormatter = [[NSDateFormatter alloc] init];
+        [self.dateFormatter setDateFormat:@"yyyyMMdd"];
+        
+        self.timeFormatter = [[NSDateFormatter alloc] init];
+        [self.timeFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        
+    }
+    return self;
 }
 + (instancetype)rowsEngine
 {
@@ -47,11 +62,9 @@
 {
     _error = error;
     [self.dataArray removeAllObjects];
-    // 获取当天日期
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateFormat:@"yyyyMMdd"];
+   // 每次获取最新时间
     self.currentTime = [[self.dateFormatter stringFromDate:[NSDate new]] lowercaseString];
-    
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [filePath enumerateObjectsUsingBlock:^(NSURL * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -81,7 +94,6 @@
         _error ? _error(err) : nil;
         return;
     }
-    
     // 是否只分析当日修改
     BOOL isNewModifiedAnalysis  = [ZKUtil obtainBoolForKey:IsNewModifiedAnalysis];
     // 要监测的文件后缀类名的数组
@@ -118,7 +130,9 @@
         NSDictionary *firstFileInfo = [manager attributesOfItemAtPath:path error:nil];
         //文件修改日期
         NSDate *modifyTimeData = [firstFileInfo objectForKey:NSFileModificationDate];
-        //获取一个文件修改时间
+        // 获取一个文件修改时间字符串
+        NSString *modifyTime = [self.timeFormatter stringFromDate:modifyTimeData];
+        //获取一个文件修改时间的int值
         NSString *modifyTimeString = [[self.dateFormatter stringFromDate:modifyTimeData] lowercaseString];
         
         if (isNewModifiedAnalysis == YES)
@@ -126,13 +140,14 @@
              // 当天修改的
             if (modifyTimeString.integerValue == self.currentTime.integerValue)
             {
-                [self.dataArray addObject:path];
+                [self.dataArray addObject:@{@"path":path,@"time":modifyTime}];
             }
         }
             // 全部文件
-        else {
-            [self.dataArray addObject:path];
-            
+        else
+        {
+            [self.dataArray addObject:@{@"path":path,@"time":modifyTime}];
+
         }
         
     }

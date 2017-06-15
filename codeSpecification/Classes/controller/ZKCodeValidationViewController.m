@@ -60,7 +60,7 @@ NSString *const kIsEdit = @"kIsEdit";
 
 - (ZKFileProcessingMode *)fileProcessingMode
 {
-
+    
     if (!_fileProcessingMode)
     {
         _fileProcessingMode = [[ZKFileProcessingMode alloc] init];
@@ -78,7 +78,7 @@ NSString *const kIsEdit = @"kIsEdit";
 #pragma mark -----界面设置-----
 - (void)setUI
 {
-      /**添加分析日子vc**/
+    /**添加分析日子vc**/
     self.logViewController = [[ZKLogViewController alloc] initWithNibName:@"ZKLogViewController" bundle:nil];
     [[self.listTableView.tabViewItems objectAtIndex:0] setView:self.logViewController.view];
     ;
@@ -143,13 +143,13 @@ NSString *const kIsEdit = @"kIsEdit";
 {
     if (self.isRun == NO)
     {
-         [self.fileProcessingMode startAnalyze];
+        [self.fileProcessingMode startAnalyzeLanguageType:self.languageType];
     }
     else
     {
         [HUD showMessenger:@"文件正在检测中,请稍后再试!" fromView:self.window.contentView dismiss:nil];
     }
-
+    
 }
 - (IBAction)changeTheAccount:(NSButton *)sender
 {
@@ -173,7 +173,7 @@ NSString *const kIsEdit = @"kIsEdit";
 {
     if (self.isRun == NO)
     {
-         [self.fileProcessingMode browseClickcompileLanguageType:self.languageType];
+        [self.fileProcessingMode browseClickcompile];
     }
     else
     {
@@ -202,6 +202,8 @@ NSString *const kIsEdit = @"kIsEdit";
 - (void)startAnalyzeData:(ZKAnalysisLogMode *)mode;
 {
     self.isRun = YES;
+    
+    [self.logViewController addTableViewData:mode isStart:YES];
 }
 /**
  结束分析
@@ -210,7 +212,14 @@ NSString *const kIsEdit = @"kIsEdit";
  */
 - (void)stopAnalyzeData:(ZKAnalysisLogMode *)mode;
 {
-    self.isRun = NO;
+
+    [self.logViewController addTableViewData:mode isStart:NO];
+    
+    // 提示是否上传
+    [NSObject showPromptAlertTitle:@"温馨提示" message:@"亲，是否上传本次检测结果？" forWindow:self.window completionHandler:^(NSModalResponse returnCode) {
+        NSLog(@"----上传完成----");
+      self.isRun = NO;
+    }];
 }
 /**
  文件分析异常
@@ -219,8 +228,8 @@ NSString *const kIsEdit = @"kIsEdit";
  */
 - (void)fileAnalysisAbnormalErrorMessage:(NSString *)message;
 {
-   self.isRun = NO;
-
+    self.isRun = NO;
+    [NSObject showErrorAlertTitle:@"温馨提示" message:message forWindow:self.window completionHandler:nil];
 }
 /**
  分析日志返回
@@ -229,8 +238,7 @@ NSString *const kIsEdit = @"kIsEdit";
  */
 - (void)analysisOfDailyReturnsData:(ZKAnalysisLogMode *)mode;
 {
-
-
+    [self.logViewController addTableViewData:mode isStart:NO];
 }
 /**
  分析结果返回
@@ -239,7 +247,7 @@ NSString *const kIsEdit = @"kIsEdit";
  */
 - (void)analysisResultsReturnsData:(ZKCodeResults *)mode;
 {
-
+    
 }
 /**
  错误描述返回
@@ -248,7 +256,7 @@ NSString *const kIsEdit = @"kIsEdit";
  */
 - (void)errorDescriptionReturnData:(ZKErrorCodeInformation *)mode;
 {
-
+    
 }
 #pragma mark --NSTokenFieldDelegate--
 /**

@@ -25,7 +25,7 @@
  @param name 提示名称
  @param message 提示信息
  @param window window
- @param handler 电话回调
+ @param handler 点击回调
  */
 + (void)showPromptAlertTitle:(NSString *)name message:(NSString *)message forWindow:(NSWindow *)window completionHandler:(void (^)(NSModalResponse returnCode))handler;
 /**
