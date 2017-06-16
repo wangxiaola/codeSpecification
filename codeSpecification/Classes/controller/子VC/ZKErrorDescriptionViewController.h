@@ -7,10 +7,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+@class ZKErrorCodeInformation;
 /**
  错误描述vc
  */
 @interface ZKErrorDescriptionViewController : NSViewController
+
+/**
+ 添加数据
+ 
+ @param list 数据
+ @param start 是否开始
+ */
+- (void)addTableViewData:(ZKErrorCodeInformation *)list isStart:(BOOL)start;
 
 @end

@@ -40,11 +40,14 @@
 // 请求地址
 #define POST_REQUEST @"http://192.168.0.88:81/dologins"
 
+// 保存结果地址
+#define POST_SAVE @"http://192.168.0.88:81/code/checkUpCodeSave.action"
+
 #ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__);
 #define LOG_METHOD NSLog(@"\n%s\n", __func__);
 #else
-#define NSLog(...); #define LOG_METHOD;
+#define NSLog(...);
 #endif
 
 #ifdef __OBJC__

@@ -10,6 +10,7 @@
 #import "ZKAnalysisLogMode.h"
 #import "ZKCodeResults.h"
 #import "ZKErrorCodeInformation.h"
+#import "ZKResultsAnalysis.h"
 
 @protocol ZKFileProcessingModeDelegate <NSObject>
 @optional
@@ -27,6 +28,13 @@
  @param mode 数据
  */
 - (void)stopAnalyzeData:(ZKAnalysisLogMode *)mode;
+
+/**
+ 分析完所有文件结果回调
+
+ @param mode 数据
+ */
+- (void)analysisResultsCallback:(ZKResultsAnalysis *)mode;
 
 /**
  文件分析异常

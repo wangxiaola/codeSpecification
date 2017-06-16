@@ -71,7 +71,7 @@
 #pragma mark  ----NSTableViewDelegate----
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    NSTableCellView *cell = [tableView makeViewWithIdentifier:@"logCell" owner:self];
+    NSTableCellView *cell = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
     if (self.dataArray.count >row)
     {
         ZKAnalysisLogMode *mode = [self.dataArray objectAtIndex:row];

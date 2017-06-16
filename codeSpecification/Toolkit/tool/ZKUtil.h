@@ -67,4 +67,12 @@
  */
 + (void)openSafarlUrl:(NSString *)url;
 
+/**
+ 字典转json格式字符串：
+
+ @param dic 数据
+ @return 字符
+ */
++ (NSString*)jsonStringToJson:(id)dic;
+
 @end

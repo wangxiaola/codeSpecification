@@ -33,6 +33,7 @@
 		3B6D96961EEE8CD60028B689 /* ZKErrorDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B6D96941EEE8CD60028B689 /* ZKErrorDescriptionViewController.xib */; };
 		3B6D969A1EEE8CE50028B689 /* ZKInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D96981EEE8CE50028B689 /* ZKInfoViewController.m */; };
 		3B6D969B1EEE8CE50028B689 /* ZKInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B6D96991EEE8CE50028B689 /* ZKInfoViewController.xib */; };
+		3B8BED821EF3A61100E43BE6 /* ZKResultsAnalysis.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8BED811EF3A61100E43BE6 /* ZKResultsAnalysis.m */; };
 		3B9939721EE793F80069E051 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9939711EE793F80069E051 /* AppDelegate.m */; };
 		3B9939751EE793F80069E051 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9939741EE793F80069E051 /* main.m */; };
 		3B9939771EE793F80069E051 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B9939761EE793F80069E051 /* Assets.xcassets */; };
@@ -97,7 +98,9 @@
 		3B6D96971EEE8CE50028B689 /* ZKInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKInfoViewController.h; sourceTree = "<group>"; };
 		3B6D96981EEE8CE50028B689 /* ZKInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKInfoViewController.m; sourceTree = "<group>"; };
 		3B6D96991EEE8CE50028B689 /* ZKInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKInfoViewController.xib; sourceTree = "<group>"; };
-		3B99396D1EE793F80069E051 /* codeSpecification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = codeSpecification.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B8BED801EF3A61100E43BE6 /* ZKResultsAnalysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKResultsAnalysis.h; sourceTree = "<group>"; };
+		3B8BED811EF3A61100E43BE6 /* ZKResultsAnalysis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKResultsAnalysis.m; sourceTree = "<group>"; };
+		3B99396D1EE793F80069E051 /* GrammarMonitoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrammarMonitoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B9939701EE793F80069E051 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3B9939711EE793F80069E051 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3B9939741EE793F80069E051 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -204,7 +207,7 @@
 		3B99396E1EE793F80069E051 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3B99396D1EE793F80069E051 /* codeSpecification.app */,
+				3B99396D1EE793F80069E051 /* GrammarMonitoring.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -281,6 +284,8 @@
 				3B6D96741EEE772F0028B689 /* ZKCodeResults.m */,
 				3B6D96761EEE796A0028B689 /* ZKErrorCodeInformation.h */,
 				3B6D96771EEE796A0028B689 /* ZKErrorCodeInformation.m */,
+				3B8BED801EF3A61100E43BE6 /* ZKResultsAnalysis.h */,
+				3B8BED811EF3A61100E43BE6 /* ZKResultsAnalysis.m */,
 				3B6D054E1EF25858006AFCAC /* ZKExceptionStatements.h */,
 			);
 			path = mode;
@@ -371,9 +376,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3B99396C1EE793F80069E051 /* codeSpecification */ = {
+		3B99396C1EE793F80069E051 /* GrammarMonitoring */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3B99397E1EE793F80069E051 /* Build configuration list for PBXNativeTarget "codeSpecification" */;
+			buildConfigurationList = 3B99397E1EE793F80069E051 /* Build configuration list for PBXNativeTarget "GrammarMonitoring" */;
 			buildPhases = (
 				3B9939691EE793F80069E051 /* Sources */,
 				3B99396A1EE793F80069E051 /* Frameworks */,
@@ -383,9 +388,9 @@
 			);
 			dependencies = (
 			);
-			name = codeSpecification;
+			name = GrammarMonitoring;
 			productName = codeSpecification;
-			productReference = 3B99396D1EE793F80069E051 /* codeSpecification.app */;
+			productReference = 3B99396D1EE793F80069E051 /* GrammarMonitoring.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -417,7 +422,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3B99396C1EE793F80069E051 /* codeSpecification */,
+				3B99396C1EE793F80069E051 /* GrammarMonitoring */,
 			);
 		};
 /* End PBXProject section */
@@ -458,6 +463,7 @@
 				3B99399A1EE7D3E20069E051 /* NSButton+ButtonColor.m in Sources */,
 				3B9939C31EE7EF860069E051 /* AFURLResponseSerialization.m in Sources */,
 				3B6660281EE8F80E00F66A6E /* HUD.m in Sources */,
+				3B8BED821EF3A61100E43BE6 /* ZKResultsAnalysis.m in Sources */,
 				3B9939721EE793F80069E051 /* AppDelegate.m in Sources */,
 				3B6660231EE8F76C00F66A6E /* DJBezierPath.m in Sources */,
 				3B6D96781EEE796A0028B689 /* ZKErrorCodeInformation.m in Sources */,
@@ -592,7 +598,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/codeSpecification/PrefixHeader.pch";
 				INFOPLIST_FILE = codeSpecification/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.daqsoft.ios.add.codeSpecification;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daqsoft.ios.add.GrammarMonitoring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -607,7 +613,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/codeSpecification/PrefixHeader.pch";
 				INFOPLIST_FILE = codeSpecification/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.daqsoft.ios.add.codeSpecification;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daqsoft.ios.add.GrammarMonitoring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -624,7 +630,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3B99397E1EE793F80069E051 /* Build configuration list for PBXNativeTarget "codeSpecification" */ = {
+		3B99397E1EE793F80069E051 /* Build configuration list for PBXNativeTarget "GrammarMonitoring" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3B99397F1EE793F80069E051 /* Debug */,

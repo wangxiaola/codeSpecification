@@ -12,6 +12,7 @@
 @implementation HUD
 + (void)showMessenger:(NSString *)messenger fromView:(NSView*)view dismiss:(void(^)())end;
 {
+    [DJProgressHUD dismiss];
     DJProgressHUD *hud = [DJProgressHUD instance];
     hud.indicatorSize = CGSizeZero;
     [DJProgressHUD showStatus:messenger FromView:view];

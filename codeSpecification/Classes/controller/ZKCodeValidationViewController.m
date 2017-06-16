@@ -131,7 +131,7 @@ NSString *const kIsEdit = @"kIsEdit";
 
 - (NSArray *)defaultIgnoreFolders
 {
-    NSArray *array = @[@"Pods",@".svn",@".git"];
+    NSArray *array = @[@"Pods",@".svn",@".git",@"xcodeproj"];
     return array;
 }
 #pragma mark  ----按钮点击事件----
@@ -193,6 +193,44 @@ NSString *const kIsEdit = @"kIsEdit";
     [ZKUtil saveBoolForKey:IsNewModifiedAnalysis valueBool:sender.state];
     [ZKUtil saveBoolForKey:kIsEdit valueBool:YES];
 }
+#pragma mark  ----分析结果数据上传----
+- (void)resultsUploadData:(ZKResultsAnalysis *)list
+{
+    //    [HUD showStatus:@"正在上传，请稍等！" fromView:self.window.contentView];
+    
+    NSDictionary *checkUpInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithFloat:list.validLines], @"validLines",
+                                 [NSNumber numberWithFloat:list.noteValidLines],@"noteValidLines",
+                                 [NSNumber numberWithFloat:list.proportion],@"proportion",
+                                 [NSNumber numberWithFloat:list.onStandard],@"onStandard",
+                                 list.quality,@"quality",
+                                 list.commitIp,@"commitIp",
+                                 list.commitName,@"commitName"
+                                 , nil];
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:[ZKUtil jsonStringToJson:checkUpInfo] forKey:@"checkUpInfo"];
+    [dic setObject:[ZKUtil jsonStringToJson:list.dataArray] forKey:@"errorInfo"];
+    ZKWeakSelf
+    [ZKRequestTool post:POST_SAVE params:dic success:^(id responseObj) {
+        
+        [HUD dismiss];
+        [NSObject showErrorAlertTitle:@"温馨提示" message:@"上传成功" forWindow:self.window completionHandler:nil];
+        
+        
+    } failure:^(NSError *error) {
+        [HUD dismiss];
+        [NSObject showPromptAlertTitle:@"温馨提示" message:@"上传出现异常错误，是否重新提交？" forWindow:self.window completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode == NSAlertFirstButtonReturn)
+            {
+                [weakSelf resultsUploadData:list];
+            }
+            
+        }];
+    }];
+    
+    
+}
 #pragma mark  ----ZKFileProcessingModeDelegate----
 /**
  开始分析
@@ -204,6 +242,8 @@ NSString *const kIsEdit = @"kIsEdit";
     self.isRun = YES;
     
     [self.logViewController addTableViewData:mode isStart:YES];
+    [self.resultsAnalysisViewController addTableViewData:nil isStart:YES];
+    [self.errorDescriptionViewController addTableViewData:nil isStart:YES];
 }
 /**
  结束分析
@@ -212,13 +252,24 @@ NSString *const kIsEdit = @"kIsEdit";
  */
 - (void)stopAnalyzeData:(ZKAnalysisLogMode *)mode;
 {
-
     [self.logViewController addTableViewData:mode isStart:NO];
-    
+}
+/**
+ 分析完所有文件结果回调
+ 
+ @param mode 数据
+ */
+- (void)analysisResultsCallback:(ZKResultsAnalysis *)mode;
+{
+    mode.commitName = self.userInfo.name;
     // 提示是否上传
+    ZKWeakSelf
     [NSObject showPromptAlertTitle:@"温馨提示" message:@"亲，是否上传本次检测结果？" forWindow:self.window completionHandler:^(NSModalResponse returnCode) {
-        NSLog(@"----上传完成----");
-      self.isRun = NO;
+        self.isRun = NO;
+        if (returnCode == NSAlertFirstButtonReturn) {
+            
+            [weakSelf resultsUploadData:mode];
+        }
     }];
 }
 /**
@@ -248,6 +299,8 @@ NSString *const kIsEdit = @"kIsEdit";
 - (void)analysisResultsReturnsData:(ZKCodeResults *)mode;
 {
     
+    
+    [self.resultsAnalysisViewController addTableViewData:mode isStart:NO];
 }
 /**
  错误描述返回
@@ -257,6 +310,8 @@ NSString *const kIsEdit = @"kIsEdit";
 - (void)errorDescriptionReturnData:(ZKErrorCodeInformation *)mode;
 {
     
+    
+    [self.errorDescriptionViewController addTableViewData:mode isStart:NO];
 }
 #pragma mark --NSTokenFieldDelegate--
 /**

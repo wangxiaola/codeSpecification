@@ -15,13 +15,13 @@
 /**类名**/
 @property (nonatomic, copy) NSString     *className;
 /**有效代码行数**/
-@property (nonatomic, copy) NSString     *codeNumber;
+@property (nonatomic, assign) CGFloat    codeNumber;
 /**有效注释行数**/
-@property (nonatomic, assign) NSInteger  noteNumber;
+@property (nonatomic, assign) CGFloat    noteNumber;
 /**注释占比**/
 @property (nonatomic, assign) CGFloat    annotationProportion;
 /**代码质量**/
 @property (nonatomic, copy) NSString     *codeQuality;
 /**不规范代码数量**/
-@property (nonatomic, assign) NSInteger  errorCodeNumber;
+@property (nonatomic, assign) CGFloat    errorCodeNumber;
 @end

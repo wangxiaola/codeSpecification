@@ -14,7 +14,6 @@
  */
 @interface ZKLogViewController : NSViewController
 
-
 /**
  添加数据
 

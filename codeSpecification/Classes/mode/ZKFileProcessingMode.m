@@ -22,6 +22,8 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
 #import "ZKFileProcessingMode.h"
 #import "ZKRowsEngine.h"
 #import "ZKExceptionStatements.h"
+#import <arpa/inet.h>  
+#import <ifaddrs.h>  
 
 @interface ZKFileProcessingMode()
 {
@@ -34,17 +36,30 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
         unsigned int analysisOfDailyReturns      :1;
         unsigned int analysisResultsReturns      :1;
         unsigned int errorDescriptionReturn      :1;
+        unsigned int analysisResultsCallback     :1;
         
     }_delegateFlags;
 }
 
 @property (nonatomic) CompileLanguageType languageType;
-@property (nonatomic, strong) NSArray <NSURL *>*filePathList;
 
+@property (nonatomic, strong) NSArray <NSURL *>*filePathList;
+// 代码结果保存
+@property (nonatomic, strong) ZKResultsAnalysis *analysis;
 @end
 @implementation ZKFileProcessingMode
 #pragma mark  ----懒加载----
-
+- (ZKResultsAnalysis *)analysis
+{
+    if (!_analysis)
+    {
+        _analysis = [[ZKResultsAnalysis alloc] init];
+        _analysis.commitIp   = @"";
+        _analysis.commitName = @"";
+        _analysis.quality    = @"";
+    }
+    return _analysis;
+}
 #pragma mark  ----delegate----
 /**
  记录代理协议状态
@@ -55,13 +70,13 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
 {
     _delegate = delegate;
     
-    _delegateFlags.startAnalyze           = [delegate respondsToSelector:@selector(startAnalyzeData:)];
-    _delegateFlags.stopAnalyze            = [delegate respondsToSelector:@selector(stopAnalyzeData:)];
-    _delegateFlags.fileAnalysisAbnormal   = [delegate respondsToSelector:@selector(fileAnalysisAbnormalErrorMessage:)];
-    _delegateFlags.analysisOfDailyReturns = [delegate respondsToSelector:@selector(analysisOfDailyReturnsData:)];
-    _delegateFlags.analysisResultsReturns = [delegate respondsToSelector:@selector(analysisOfDailyReturnsData:)];
-    _delegateFlags.errorDescriptionReturn = [delegate respondsToSelector:@selector(errorDescriptionReturnData:)];
-    
+    _delegateFlags.startAnalyze            = [delegate respondsToSelector:@selector(startAnalyzeData:)];
+    _delegateFlags.stopAnalyze             = [delegate respondsToSelector:@selector(stopAnalyzeData:)];
+    _delegateFlags.fileAnalysisAbnormal    = [delegate respondsToSelector:@selector(fileAnalysisAbnormalErrorMessage:)];
+    _delegateFlags.analysisOfDailyReturns  = [delegate respondsToSelector:@selector(analysisOfDailyReturnsData:)];
+    _delegateFlags.analysisResultsReturns  = [delegate respondsToSelector:@selector(analysisOfDailyReturnsData:)];
+    _delegateFlags.errorDescriptionReturn  = [delegate respondsToSelector:@selector(errorDescriptionReturnData:)];
+    _delegateFlags.analysisResultsCallback = [delegate respondsToSelector:@selector(analysisResultsCallback:)];
 }
 #pragma mark  ----文件处理区域----
 /**
@@ -144,6 +159,16 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
 #pragma mark /**** Objective *****/
 - (void)objectiveDetectionData:(NSArray <NSDictionary *> *)fileArrray;
 {
+    
+    self.analysis.commitIp   = @"";
+    self.analysis.commitName = @"";
+    self.analysis.quality    = @"";
+    self.analysis.validLines     = 0.0f;
+    self.analysis.noteValidLines = 0.0f;
+    self.analysis.proportion     = 0.0f;
+    self.analysis.onStandard     = 0.0f;
+    [self.analysis.dataArray removeAllObjects];
+    self.analysis.fileNumber     = fileArrray.count;
     // 开始检查
     NSString *stateString = [NSString stringWithFormat:@"******检测完成 共%ld个类，开始分析******",fileArrray.count];
     [self addAnalysisLogDataModifyTime:stateString classSuffix:@""];
@@ -164,6 +189,8 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
             else
             {
                 [self addAnalyzeIsStart:NO];
+                [self addAnalysisResultsCallback:self.analysis];
+                
             }
         });
         
@@ -184,11 +211,12 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
     [self addAnalysisLogDataModifyTime:[NSString stringWithFormat:@"修改时间：%@",time] classSuffix:[NSString stringWithFormat:@"开始分析文件：%@",className]];
     //获取文件信息
     NSString *content = [NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
+    content = [content stringByReplacingOccurrencesOfString:@"\r" withString:@""];
     NSArray *contenArray = [content componentsSeparatedByString:@"\n"];
     
-    __block NSInteger codeLines           = 0;//有效代码行数
-    __block NSInteger commentLines        = 0;//有效注释行数
-    __block NSInteger exceptionCodeNumber = 0;//异常代码数量
+    __block CGFloat codeLines           = 0;//有效代码行数
+    __block CGFloat commentLines        = 0;//有效注释行数
+    __block CGFloat exceptionCodeNumber = 0;//异常代码数量
     
     [contenArray enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         //        http://www.cocoachina.com/ios/20160111/14926.html
@@ -200,24 +228,220 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
             // 首字母判断 如果是函数类就是有效代码
             if ([self isFunctionCharacterString:contenString])
             {
+                if ([contenString containsString:@"//"])
+                {
+                    commentLines += 1;
+                }
+#pragma mark  ----ValidationCodeTypeAll----
                 /*** - ****/
-                if (![self isCodeSpaceString:contenString predicate:@"-" validationType:ValidationCodeTypeRight]) {
+                if (![self isCodeSpaceString:contenString predicate:@"-" validationType:ValidationCodeTypeAll]) {
                     
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:@"'-' 右边要空格"];
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+                /*** + ****/
+                if (![self isCodeSpaceString:contenString predicate:@"+" validationType:ValidationCodeTypeAll]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+                /*** > ****/
+                if (![self isCodeSpaceString:contenString predicate:@">" validationType:ValidationCodeTypeAll]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+                /*** && ****/
+                if (![self isCodeSpaceString:contenString predicate:@"&&" validationType:ValidationCodeTypeAll]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+                /*** != ****/
+                if (![self isCodeSpaceString:contenString predicate:@"!=" validationType:ValidationCodeTypeAll]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+                /*** >= ****/
+                if (![self isCodeSpaceString:contenString predicate:@">=" validationType:ValidationCodeTypeAll]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+                /*** <= ****/
+                if (![self isCodeSpaceString:contenString predicate:@"<=" validationType:ValidationCodeTypeAll]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+                /*** == ****/
+                if (![self isCodeSpaceString:contenString predicate:@"==" validationType:ValidationCodeTypeAll]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+                /*** += ****/
+                if (![self isCodeSpaceString:contenString predicate:@"+=" validationType:ValidationCodeTypeAll]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+                /*** -= ****/
+                if (![self isCodeSpaceString:contenString predicate:@"-=" validationType:ValidationCodeTypeAll]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+                /*** *= ****/
+                if (![self isCodeSpaceString:contenString predicate:@"*=" validationType:ValidationCodeTypeAll]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+                /*** /= ****/
+                if (![self isCodeSpaceString:contenString predicate:@"/=" validationType:ValidationCodeTypeAll]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+                /*** %= ****/
+                if (![self isCodeSpaceString:contenString predicate:@"%=" validationType:ValidationCodeTypeAll]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                    exceptionCodeNumber += 1;
+                }
+#pragma mark  ----ValidationCodeTypeLeft----
+                
+                /*** * ****/
+                if (![self isCodeSpaceString:contenString predicate:@"*" validationType:ValidationCodeTypeLeft]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_002];
                     exceptionCodeNumber += 1;
                 }
                 
+#pragma mark  ----ValidationCodeTypeRight----
+                
+                /*** , ****/
+                if (![self isCodeSpaceString:contenString predicate:@"," validationType:ValidationCodeTypeRight]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                    exceptionCodeNumber += 1;
+                }
+                
+                /*** @property ****/
+                if (![self isCodeSpaceString:contenString predicate:@"@property" validationType:ValidationCodeTypeRight]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                    exceptionCodeNumber += 1;
+                }
+                
+                /*** weak) ****/
+                if (![self isCodeSpaceString:contenString predicate:@"weak)" validationType:ValidationCodeTypeRight]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                    exceptionCodeNumber += 1;
+                }
+                
+                /*** getterName) ****/
+                if (![self isCodeSpaceString:contenString predicate:@"getterName)" validationType:ValidationCodeTypeRight]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                    exceptionCodeNumber += 1;
+                }
+                
+                /*** setterName) ****/
+                if (![self isCodeSpaceString:contenString predicate:@"setterName)" validationType:ValidationCodeTypeRight]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                    exceptionCodeNumber += 1;
+                }
+                
+                /*** readonly) ****/
+                if (![self isCodeSpaceString:contenString predicate:@"readonly)" validationType:ValidationCodeTypeRight]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                    exceptionCodeNumber += 1;
+                }
+                
+                /*** assign) ****/
+                if (![self isCodeSpaceString:contenString predicate:@"assign)" validationType:ValidationCodeTypeRight]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                    exceptionCodeNumber += 1;
+                }
+                
+                /*** retain) ****/
+                if (![self isCodeSpaceString:contenString predicate:@"retain)" validationType:ValidationCodeTypeRight]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                    exceptionCodeNumber += 1;
+                }
+                
+                
+                /*** copy) ****/
+                if (![self isCodeSpaceString:contenString predicate:@"copy)" validationType:ValidationCodeTypeRight]) {
+                    
+                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                    exceptionCodeNumber += 1;
+                }
             }
             else
             {
-                //注释代码
-                commentLines += 1;
+                if ([contenString containsString:@"#import"])
+                {
+                    // 有效代码数量+1
+                    codeLines += 1;
+                }
+                else
+                {
+//                    NSLog(@"\n\n注释代码 = %@",contenString);
+                    //注释代码+1
+                    commentLines += 1;
+                }
+                
             }
         }
         
     }];
+
+    // 注释百分比
+    CGFloat annotationProportion = commentLines/codeLines*100;
+    CGFloat errorProportionNumber = exceptionCodeNumber/codeLines*100;
+    
+    [self addResultsAnalysisDataFilePath:file className:className codeNumber:codeLines noteNumber:commentLines annotationProportion:annotationProportion codeQuality:[self annotationProportionNumber:annotationProportion errorProportionNumber:errorProportionNumber] errorCodeNumber:exceptionCodeNumber];
+    
+    self.analysis.validLines     += codeLines;
+    self.analysis.noteValidLines += commentLines;
+    self.analysis.onStandard     += exceptionCodeNumber;
+    
+    
 }
 #pragma mark  ----字符判断----
+
+/**
+ 代码合格判断
+
+ @param annotationProportion 注释比例
+ @param errorProportion 异常比例
+ @return 质量
+ */
+- (NSString *)annotationProportionNumber:(CGFloat)annotationProportion errorProportionNumber:(CGFloat)errorProportion;
+{
+    if (annotationProportion > 30 && errorProportion < 5)
+    {
+        return @"优";
+    }
+    if (annotationProportion >20 && errorProportion < 10)
+    {
+        return @"良";
+    }
+    if (annotationProportion >15 && errorProportion < 15)
+    {
+        return @"合格";
+    }
+    return @"不合格";
+}
 /**
  字符是否是函数字符
  
@@ -234,11 +458,13 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
     NSPredicate*predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     
     NSString *first = [key substringToIndex:1];//字符串开始
-    NSArray  *array =@[@"-", @"_" , @"+", @"#", @"@", @"{", @"}", @";", @"&", @"|"];
+    NSArray  *array =@[@"-", @"_" , @"+", @"@", @"{", @"}", @";", @"&", @"|",@"["];
     //匹配字符串，反回结果， SELF＝＝表示数组中每一个元素
     NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"SELF == %@", first];
     BOOL isSpecialCharacters = [array filteredArrayUsingPredicate:predicate1].count >0;
-    if ([predicate evaluateWithObject:key] || isSpecialCharacters == YES)
+    BOOL isLetter = [predicate evaluateWithObject:first];
+    
+    if (isLetter || isSpecialCharacters == YES)
     {
         return YES;
     }
@@ -266,34 +492,123 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
     {
         return YES;
     }
-    NSInteger predicateLength = predicate.length;
-    //现获取要截取的字符串位置
-    NSRange range = [str rangeOfString:predicate];
     
-    if (type == ValidationCodeTypeLeft)
-    {
-        NSRange  leftRange = NSMakeRange(range.location - predicateLength, 1);
-        NSString * leftResult = [str substringWithRange:leftRange];
+    @try {
+        NSInteger predicateLength = predicate.length;
+        //现获取要截取的字符串位置
+        NSRange range = [str rangeOfString:predicate];
         
-        return [leftResult isEqualToString:@" "];
-    }
-    else if (type == ValidationCodeTypeRight)
-    {
-        NSRange rightRange = NSMakeRange(range.location + predicateLength, 1);
-        NSString * rightResult  = [str substringWithRange:rightRange];
-        return [rightResult isEqualToString:@" "];
-    }
-    else if (type == ValidationCodeTypeAll)
-    {   // 截取左边
-        NSRange  leftRange = NSMakeRange(range.location - predicateLength, 1);
-        NSString * leftResult = [str substringWithRange:leftRange];
-        // 截取右边
-        NSRange rightRange = NSMakeRange(range.location + predicateLength, 1);
-        NSString * rightResult  = [str substringWithRange:rightRange];
+        if (type == ValidationCodeTypeLeft)
+        {
+            if (range.location == 0)
+            {
+                return YES;
+            }
+            NSRange  leftRange = NSMakeRange(range.location - 1, 1);
+            NSString * leftResult = [str substringWithRange:leftRange];
+            return [self verifyOperationCharacters:leftResult];
+        }
+        else if (type == ValidationCodeTypeRight)
+        {
+            
+            if (range.location == str.length - predicateLength) {
+                
+                return YES;
+            }
+            NSRange rightRange = NSMakeRange(range.location + predicateLength, 1);
+            NSString * rightResult  = [str substringWithRange:rightRange];
+            return [self verifyOperationCharacters:rightResult];
+        }
+        else if (type == ValidationCodeTypeAll)
+        {
+            BOOL leftValidation  = NO;
+            BOOL rightValidation = NO;
+            
+            if (range.location == 0)
+            {
+                leftValidation = YES;
+            }
+            else
+            {
+                // 截取左边
+                NSRange  leftRange = NSMakeRange(range.location - 1, 1);
+                NSString * leftResult = [str substringWithRange:leftRange];
+                leftValidation =  [self verifyOperationCharacters:leftResult];;
+            }
+            
+            if (range.location == str.length - predicateLength)
+            {
+                rightValidation = YES;
+            }
+            else
+            {
+                // 截取右边
+                NSRange rightRange = NSMakeRange(range.location + predicateLength, 1);
+                NSString * rightResult  = [str substringWithRange:rightRange];
+                rightValidation = [self verifyOperationCharacters:rightResult];;
+            }
+            
+            
+            return leftValidation == YES && rightValidation == YES;
+        }
         
-        return ([leftResult isEqualToString:@" "],[rightResult isEqualToString:@" "]);
+    } @catch (NSException *exception) {
+        
+        NSLog(@"\n\n方法<isCodeSpaceString>崩溃 \n 异常字符：%@ \n 错误信息：%@ \n\n",predicate,exception);
     }
-    return YES;
+    return NO;
+}
+
+/**
+ 运算字符验证
+ 
+ @param str 字符
+ @return yes
+ */
+- (BOOL)verifyOperationCharacters:(NSString *)str
+{
+    if ([str isEqualToString:@" "])
+    {
+        return YES;
+    }
+    
+    NSArray  *array =@[@"-", @"+" , @"<", @">", @"=", @"!",@"]",@"\""];
+    //匹配字符串，反回结果， SELF＝＝表示数组中每一个元素
+    NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"SELF == %@", str];
+    BOOL isOperation = [array filteredArrayUsingPredicate:predicate1].count >0;
+    
+    return isOperation;
+}
+
+/**
+ 获取本地ip地址
+
+ @return 地址
+ */
+- (NSString *)getIPAddress {
+    NSString *address          = @"error";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr  = NULL;
+    int success = 0;
+    // retrieve the current interfaces - returns 0 on success
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        // Loop through linked list of interfaces
+        temp_addr = interfaces;
+        while(temp_addr != NULL) {
+            if(temp_addr->ifa_addr->sa_family == AF_INET) {
+                // Check if interface is en0 which is the wifi connection on the iPhone
+                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // Get NSString from C String
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                }
+            }
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    // Free memory
+    freeifaddrs(interfaces);
+    return address;
 }
 #pragma mark /**** Swift *****/
 - (void)swiftDetectionData:(NSArray <NSDictionary *> *)fileArrray;
@@ -357,6 +672,24 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
         }];
     }
 }
+- (void)addAnalysisResultsCallback:(ZKResultsAnalysis *)list
+{
+    if (_delegateFlags.analysisResultsCallback)
+    {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            
+            // 注释百分比
+            CGFloat annotationProportion  = self.analysis.noteValidLines/self.analysis.validLines * 100;
+            CGFloat errorProportionNumber = self.analysis.onStandard/self.analysis.validLines * 100;
+            
+            self.analysis.commitIp   = [self getIPAddress];
+            self.analysis.proportion = annotationProportion;
+            self.analysis.quality    = [self annotationProportionNumber:annotationProportion errorProportionNumber:errorProportionNumber];
+            [self.delegate analysisResultsCallback:self.analysis];
+            
+        }];
+    }
+}
 /**
  分析日志添加
  
@@ -392,11 +725,11 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
  */
 - (void)addResultsAnalysisDataFilePath:(NSString *)filePath
                              className:(NSString *)className
-                            codeNumber:(NSString *)codeNumber
-                            noteNumber:(NSInteger)noteNumber
+                            codeNumber:(CGFloat )codeNumber
+                            noteNumber:(CGFloat)noteNumber
                   annotationProportion:(CGFloat)annotationProportion
                            codeQuality:(NSString *)codeQuality
-                       errorCodeNumber:(NSInteger)errorCodeNumber
+                       errorCodeNumber:(CGFloat)errorCodeNumber
 {
     if (_delegateFlags.analysisResultsReturns)
     {
@@ -431,9 +764,11 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
     if (_delegateFlags.errorDescriptionReturn)
     {
         ZKErrorCodeInformation *mode = [[ZKErrorCodeInformation alloc] init];
-        mode.whichLine        = whichLine;
+        mode.whichLine        = whichLine + 1;// 代码里没有第0行
         mode.className        = className;
         mode.errorDescription = errorDescription;
+        
+        [self.analysis.dataArray addObject:@{@"filePath":className,@"lines":[NSNumber numberWithInteger:whichLine],@"erroRemark":errorDescription}];
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
