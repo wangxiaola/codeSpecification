@@ -232,158 +232,163 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
                 {
                     commentLines += 1;
                 }
+                
+                if ([self whetherYouNeedToVerify:contenString] == NO)
+                {
 #pragma mark  ----ValidationCodeTypeAll----
-                /*** - ****/
-                if (![self isCodeSpaceString:contenString predicate:@"-" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
-                /*** + ****/
-                if (![self isCodeSpaceString:contenString predicate:@"+" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
-                /*** > ****/
-                if (![self isCodeSpaceString:contenString predicate:@">" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
-                /*** && ****/
-                if (![self isCodeSpaceString:contenString predicate:@"&&" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
-                /*** != ****/
-                if (![self isCodeSpaceString:contenString predicate:@"!=" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
-                /*** >= ****/
-                if (![self isCodeSpaceString:contenString predicate:@">=" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
-                /*** <= ****/
-                if (![self isCodeSpaceString:contenString predicate:@"<=" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
-                /*** == ****/
-                if (![self isCodeSpaceString:contenString predicate:@"==" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
-                /*** += ****/
-                if (![self isCodeSpaceString:contenString predicate:@"+=" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
-                /*** -= ****/
-                if (![self isCodeSpaceString:contenString predicate:@"-=" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
-                /*** *= ****/
-                if (![self isCodeSpaceString:contenString predicate:@"*=" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
-                /*** /= ****/
-                if (![self isCodeSpaceString:contenString predicate:@"/=" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
-                /*** %= ****/
-                if (![self isCodeSpaceString:contenString predicate:@"%=" validationType:ValidationCodeTypeAll]) {
-                    
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
-                    exceptionCodeNumber += 1;
-                }
+                    /*** - ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"-" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
+                    /*** + ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"+" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
+                    /*** > ****/
+                    if (![self isCodeSpaceString:contenString predicate:@">" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
+                    /*** && ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"&&" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
+                    /*** != ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"!=" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
+                    /*** >= ****/
+                    if (![self isCodeSpaceString:contenString predicate:@">=" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
+                    /*** <= ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"<=" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
+                    /*** == ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"==" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
+                    /*** += ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"+=" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
+                    /*** -= ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"-=" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
+                    /*** *= ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"*=" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
+                    /*** /= ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"/=" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
+                    /*** %= ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"%=" validationType:ValidationCodeTypeAll]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_001];
+                        exceptionCodeNumber += 1;
+                    }
 #pragma mark  ----ValidationCodeTypeLeft----
-                
-                /*** * ****/
-                if (![self isCodeSpaceString:contenString predicate:@"*" validationType:ValidationCodeTypeLeft]) {
                     
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_002];
-                    exceptionCodeNumber += 1;
-                }
-                
+                    /*** * ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"*" validationType:ValidationCodeTypeLeft]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_002];
+                        exceptionCodeNumber += 1;
+                    }
+                    
 #pragma mark  ----ValidationCodeTypeRight----
-                
-                /*** , ****/
-                if (![self isCodeSpaceString:contenString predicate:@"," validationType:ValidationCodeTypeRight]) {
                     
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
-                    exceptionCodeNumber += 1;
-                }
-                
-                /*** @property ****/
-                if (![self isCodeSpaceString:contenString predicate:@"@property" validationType:ValidationCodeTypeRight]) {
+                    /*** , ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"," validationType:ValidationCodeTypeRight]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                        exceptionCodeNumber += 1;
+                    }
                     
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
-                    exceptionCodeNumber += 1;
-                }
-                
-                /*** weak) ****/
-                if (![self isCodeSpaceString:contenString predicate:@"weak)" validationType:ValidationCodeTypeRight]) {
+                    /*** @property ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"@property" validationType:ValidationCodeTypeRight]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                        exceptionCodeNumber += 1;
+                    }
                     
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
-                    exceptionCodeNumber += 1;
-                }
-                
-                /*** getterName) ****/
-                if (![self isCodeSpaceString:contenString predicate:@"getterName)" validationType:ValidationCodeTypeRight]) {
+                    /*** weak) ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"weak)" validationType:ValidationCodeTypeRight]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                        exceptionCodeNumber += 1;
+                    }
                     
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
-                    exceptionCodeNumber += 1;
-                }
-                
-                /*** setterName) ****/
-                if (![self isCodeSpaceString:contenString predicate:@"setterName)" validationType:ValidationCodeTypeRight]) {
+                    /*** getterName) ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"getterName)" validationType:ValidationCodeTypeRight]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                        exceptionCodeNumber += 1;
+                    }
                     
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
-                    exceptionCodeNumber += 1;
-                }
-                
-                /*** readonly) ****/
-                if (![self isCodeSpaceString:contenString predicate:@"readonly)" validationType:ValidationCodeTypeRight]) {
+                    /*** setterName) ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"setterName)" validationType:ValidationCodeTypeRight]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                        exceptionCodeNumber += 1;
+                    }
                     
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
-                    exceptionCodeNumber += 1;
-                }
-                
-                /*** assign) ****/
-                if (![self isCodeSpaceString:contenString predicate:@"assign)" validationType:ValidationCodeTypeRight]) {
+                    /*** readonly) ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"readonly)" validationType:ValidationCodeTypeRight]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                        exceptionCodeNumber += 1;
+                    }
                     
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
-                    exceptionCodeNumber += 1;
-                }
-                
-                /*** retain) ****/
-                if (![self isCodeSpaceString:contenString predicate:@"retain)" validationType:ValidationCodeTypeRight]) {
+                    /*** assign) ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"assign)" validationType:ValidationCodeTypeRight]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                        exceptionCodeNumber += 1;
+                    }
                     
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
-                    exceptionCodeNumber += 1;
-                }
-                
-                
-                /*** copy) ****/
-                if (![self isCodeSpaceString:contenString predicate:@"copy)" validationType:ValidationCodeTypeRight]) {
+                    /*** retain) ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"retain)" validationType:ValidationCodeTypeRight]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                        exceptionCodeNumber += 1;
+                    }
                     
-                    [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
-                    exceptionCodeNumber += 1;
+                    
+                    /*** copy) ****/
+                    if (![self isCodeSpaceString:contenString predicate:@"copy)" validationType:ValidationCodeTypeRight]) {
+                        
+                        [self addErrorInformationDataWhichLine:idx className:className errorDescription:Exception_003];
+                        exceptionCodeNumber += 1;
+                    }
+
                 }
             }
             else
@@ -428,15 +433,15 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
  */
 - (NSString *)annotationProportionNumber:(CGFloat)annotationProportion errorProportionNumber:(CGFloat)errorProportion;
 {
-    if (annotationProportion > 30 && errorProportion < 5)
+    if (annotationProportion > 20 && errorProportion < 15)
     {
         return @"优";
     }
-    if (annotationProportion >20 && errorProportion < 10)
+    if (annotationProportion >15 && errorProportion < 20)
     {
         return @"良";
     }
-    if (annotationProportion >15 && errorProportion < 15)
+    if (annotationProportion >10 && errorProportion < 25)
     {
         return @"合格";
     }
@@ -472,6 +477,21 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
     {
         return NO;
     }
+}
+
+/**
+ 是否需要验证
+
+ @param str 字符
+ @return bool
+ */
+- (BOOL)whetherYouNeedToVerify:(NSString *)str
+{
+    NSArray  *array =@[@"@interface", @"@protocol"];
+    //匹配字符串，反回结果， SELF＝＝表示数组中每一个元素
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF == %@", str];
+    BOOL isSpecialCharacters = [array filteredArrayUsingPredicate:predicate].count >0;
+    return isSpecialCharacters;
 }
 
 /**
@@ -572,7 +592,8 @@ typedef NS_ENUM(NSInteger, ValidationCodeType) {
         return YES;
     }
     
-    NSArray  *array =@[@"-", @"+" , @"<", @">", @"=", @"!",@"]",@"\""];
+    
+    NSArray  *array =@[@"-", @"+" , @"<", @">", @"=", @"!",@"]",@"\"",@")",@"@",@"{",@"}",@":",@"*",@"d"];
     //匹配字符串，反回结果， SELF＝＝表示数组中每一个元素
     NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"SELF == %@", str];
     BOOL isOperation = [array filteredArrayUsingPredicate:predicate1].count >0;

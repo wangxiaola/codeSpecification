@@ -41,7 +41,7 @@
 #define POST_REQUEST @"http://192.168.0.88:81/dologins"
 
 // 保存结果地址
-#define POST_SAVE @"http://192.168.0.88:81/code/checkUpCodeSave.action"
+#define POST_SAVE @"http://192.168.2.52:81/codeSaves"
 
 #ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__);

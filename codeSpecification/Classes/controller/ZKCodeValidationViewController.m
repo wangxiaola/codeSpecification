@@ -196,7 +196,7 @@ NSString *const kIsEdit = @"kIsEdit";
 #pragma mark  ----分析结果数据上传----
 - (void)resultsUploadData:(ZKResultsAnalysis *)list
 {
-    //    [HUD showStatus:@"正在上传，请稍等！" fromView:self.window.contentView];
+    [HUD showStatus:@"正在上传，请稍等！" fromView:self.window.contentView];
     
     NSDictionary *checkUpInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [NSNumber numberWithFloat:list.validLines], @"validLines",
@@ -214,21 +214,32 @@ NSString *const kIsEdit = @"kIsEdit";
     ZKWeakSelf
     [ZKRequestTool post:POST_SAVE params:dic success:^(id responseObj) {
         
+        NSString *errorCode = [responseObj valueForKey:@"errorCode"];
+        if ([errorCode isEqualToString:@"success"])
+        {
+            [NSObject showErrorAlertTitle:@"温馨提示" message:@"上传成功" forWindow:self.window completionHandler:nil];
+        }
+        else
+        {
+            [weakSelf requestErrData:list];
+        }
         [HUD dismiss];
-        [NSObject showErrorAlertTitle:@"温馨提示" message:@"上传成功" forWindow:self.window completionHandler:nil];
-        
         
     } failure:^(NSError *error) {
         [HUD dismiss];
-        [NSObject showPromptAlertTitle:@"温馨提示" message:@"上传出现异常错误，是否重新提交？" forWindow:self.window completionHandler:^(NSModalResponse returnCode) {
-            if (returnCode == NSAlertFirstButtonReturn)
-            {
-                [weakSelf resultsUploadData:list];
-            }
-            
-        }];
+        [weakSelf requestErrData:list];
     }];
-    
+}
+- (void)requestErrData:(ZKResultsAnalysis *)list
+{
+    ZKWeakSelf
+    [NSObject showPromptAlertTitle:@"温馨提示" message:@"上传出现异常错误，是否重新提交？" forWindow:self.window completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn)
+        {
+            [weakSelf resultsUploadData:list];
+        }
+        
+    }];
     
 }
 #pragma mark  ----ZKFileProcessingModeDelegate----
